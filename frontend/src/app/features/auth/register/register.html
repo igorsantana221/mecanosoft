@@ -1,0 +1,251 @@
+<div
+    class="bg-surface text-on-surface font-body min-h-screen flex items-center justify-center p-4 sm:p-8 antialiased relative overflow-hidden">
+    <!-- Atmospheric Depth Elements -->
+    <div
+        class="absolute top-[-15%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-primary-fixed-dim/20 rounded-full blur-[100px] pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-[-15%] right-[-10%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] bg-secondary-fixed/30 rounded-full blur-[120px] pointer-events-none">
+    </div>
+
+    <!-- Centered Card Layout -->
+    <div
+        class="w-full max-w-[600px] bg-surface-container-lowest rounded-xl p-8 sm:p-12 shadow-[0_40px_60px_-10px_rgba(25,28,30,0.06)] relative z-10 flex flex-col gap-10">
+
+        <!-- Header -->
+        <header class="flex flex-col items-center text-center gap-3">
+            <div class="flex items-center gap-2 text-primary">
+                <!-- Logo Mecanosoft -->
+                <img src="logo.png" alt="Logo Mecanosoft" class="w-25 h-10 object-contain" />
+            </div>
+            <div>
+                <h1 class="font-headline text-3xl font-extrabold text-on-surface tracking-tight mb-2">Criar conta</h1>
+                <p class="text-on-surface-variant text-sm font-body leading-[1.6]">Junte-se à plataforma exclusiva para
+                    gestão de oficinas.</p>
+            </div>
+        </header>
+
+        <!-- Form -->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
+            <div class="flex flex-col gap-6">
+                <!-- Informações Básicas -->
+                <div class="flex flex-col gap-4">
+                    <h3
+                        class="text-on-surface font-headline font-semibold text-lg border-b border-surface-container-high pb-2">
+                        Informações da Conta</h3>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-medium text-on-surface font-label ml-1" for="fullName">Nome
+                            Completo</label>
+                        <input formControlName="name"
+                            class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                            id="fullName" name="fullName" placeholder="ex: João da Silva" required type="text" />
+                        <span
+                            *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.hasError('required')"
+                            class="text-error text-xs ml-1 font-medium mt-1">Nome completo é obrigatório.</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1" for="email">E-mail
+                                Corporativo</label>
+                            <input formControlName="email"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-2 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="email" name="email" placeholder="joao@example.com" required type="email" />
+                            <span
+                                *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')"
+                                class="text-error text-xs ml-1 font-medium mt-1">E-mail é obrigatório.</span>
+                            <span
+                                *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.hasError('email')"
+                                class="text-error text-xs ml-1 font-medium mt-1">Formato de e-mail inválido.</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1"
+                                for="password">Senha</label>
+                            <input formControlName="password"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="password" name="password" placeholder="••••••••" required type="password" />
+                            <span
+                                *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')"
+                                class="text-error text-xs ml-1 font-medium mt-1">Senha é obrigatória.</span>
+                            <span
+                                *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.hasError('minlength')"
+                                class="text-error text-xs ml-1 font-medium mt-1">A senha deve ter no mínimo 8
+                                caracteres.</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Dados da Empresa -->
+                <div class="flex flex-col gap-4">
+                    <h3
+                        class="text-on-surface font-headline font-semibold text-lg border-b border-surface-container-high pb-2 mt-2">
+                        Dados da Empresa</h3>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-medium text-on-surface font-label ml-1" for="companyName">Nome da
+                            Empresa</label>
+                        <input formControlName="companyName"
+                            class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                            id="companyName" name="companyName" placeholder="Minha Empresa LTDA" required type="text" />
+                        <span
+                            *ngIf="registerForm.get('companyName')?.touched && registerForm.get('companyName')?.hasError('required')"
+                            class="text-error text-xs ml-1 font-medium mt-1">Nome da Empresa é obrigatório.</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1"
+                                for="cnpj">CPF/CNPJ</label>
+                            <input formControlName="cnpj"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="cnpj" name="cnpj" placeholder="CPF ou CNPJ" required type="text" />
+                            <span
+                                *ngIf="registerForm.get('cnpj')?.touched && registerForm.get('cnpj')?.hasError('required')"
+                                class="text-error text-xs ml-1 font-medium mt-1">CPF/CNPJ é obrigatório.</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1"
+                                for="phone">Telefone</label>
+                            <input formControlName="phone"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="phone" name="phone" placeholder="(00) 00000-0000" required type="text" />
+                            <span
+                                *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.hasError('required')"
+                                class="text-error text-xs ml-1 font-medium mt-1">Telefone é obrigatório.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Endereço -->
+                <div class="flex flex-col gap-4">
+                    <h3
+                        class="text-on-surface font-headline font-semibold text-lg border-b border-surface-container-high pb-2 mt-2">
+                        Endereço</h3>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-medium text-on-surface font-label ml-1" for="cep">CEP</label>
+                        <div class="relative">
+                            <input formControlName="cep" (blur)="searchCep()"
+                                class="w-full bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="cep" name="cep" placeholder="00000-000" required type="text" />
+                            <div *ngIf="isLoadingCep"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <span
+                                    class="material-symbols-outlined text-primary animate-spin">progress_activity</span>
+                            </div>
+                        </div>
+                        <span *ngIf="registerForm.get('cep')?.touched && registerForm.get('cep')?.hasError('required')"
+                            class="text-error text-xs ml-1 font-medium mt-1">CEP é obrigatório.</span>
+                        <span *ngIf="registerForm.get('cep')?.touched && registerForm.get('cep')?.hasError('minlength')"
+                            class="text-error text-xs ml-1 font-medium mt-1">O CEP deve ter 8 dígitos.</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                        <div class="flex flex-col gap-2 sm:col-span-3">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1"
+                                for="street">Rua/Logradouro</label>
+                            <input formControlName="street"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="street" name="street" placeholder="Rua Exemplo" required type="text" />
+                            <span
+                                *ngIf="registerForm.get('street')?.touched && registerForm.get('street')?.hasError('required')"
+                                class="text-error text-xs ml-1 font-medium mt-1">Logradouro é obrigatório.</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1"
+                                for="number">Número</label>
+                            <input formControlName="number"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="number" name="number" placeholder="123" required type="text" />
+                            <span
+                                *ngIf="registerForm.get('number')?.touched && registerForm.get('number')?.hasError('required')"
+                                class="text-error text-xs ml-1 font-medium mt-1">Número é obrigatório.</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1"
+                                for="complement">Complemento</label>
+                            <input formControlName="complement"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="complement" name="complement" placeholder="Apto 101" type="text" />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1"
+                                for="neighborhood">Bairro</label>
+                            <input formControlName="neighborhood"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="neighborhood" name="neighborhood" placeholder="Centro" required type="text" />
+                            <span
+                                *ngIf="registerForm.get('neighborhood')?.touched && registerForm.get('neighborhood')?.hasError('required')"
+                                class="text-error text-xs ml-1 font-medium mt-1">Bairro é obrigatório.</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="flex flex-col gap-2 sm:col-span-2">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1" for="city">Cidade</label>
+                            <input formControlName="city"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="city" name="city" placeholder="São Paulo" required type="text" />
+                            <span
+                                *ngIf="registerForm.get('city')?.touched && registerForm.get('city')?.hasError('required')"
+                                class="text-error text-xs ml-1 font-medium mt-1">Cidade é obrigatória.</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-medium text-on-surface font-label ml-1"
+                                for="state">Estado</label>
+                            <input formControlName="state"
+                                class="bg-surface-container-low border-2 border-transparent text-on-surface rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:border-surface-tint focus:ring-0 transition-all duration-200 placeholder:text-outline font-body"
+                                id="state" name="state" placeholder="SP" required type="text" />
+                            <span
+                                *ngIf="registerForm.get('state')?.touched && registerForm.get('state')?.hasError('required')"
+                                class="text-error text-xs ml-1 font-medium mt-1">Estado é obrigatório.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <!-- <div class="flex items-start gap-3 mt-2 pl-1">
+                <div class="flex items-center h-5 mt-0.5">
+                    <input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface-container-lowest bg-surface-container-lowest cursor-pointer transition-colors" id="terms" name="terms" required="" type="checkbox"/>
+                </div>
+                <label class="text-sm text-on-surface-variant font-body leading-[1.5] cursor-pointer" for="terms">
+                    Eu concordo com os 
+                    <a class="text-primary hover:text-primary-container font-medium transition-colors border-b border-transparent hover:border-primary-container pb-0.5" href="#">Termos de Serviço</a> 
+                    e a 
+                    <a class="text-primary hover:text-primary-container font-medium transition-colors border-b border-transparent hover:border-primary-container pb-0.5" href="#">Política de Privacidade</a>.
+                </label>
+            </div> -->
+
+            <!-- Submit Button -->
+            <button [disabled]="isLoading()"
+                class="mt-4 w-full py-4 px-6 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-medium text-base hover:opacity-95 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+                type="submit">
+                <ng-container *ngIf="!isLoading()">
+                    Criar conta
+                    <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform"
+                        style="font-variation-settings: 'FILL' 1;">arrow_right_alt</span>
+                </ng-container>
+                <ng-container *ngIf="isLoading()">
+                    <span class="material-symbols-outlined text-lg animate-spin">
+                        progress_activity
+                    </span>
+                    Criando conta...
+                </ng-container>
+            </button>
+        </form>
+
+        <!-- Footer Link -->
+        <div
+            class="text-center text-sm font-body text-on-surface-variant pt-2 border-t border-surface-container-high/50">
+            Já tem uma conta?
+            <a class="text-primary font-semibold hover:text-primary-container transition-colors ml-1"
+                routerLink="/login">Entrar</a>
+        </div>
+    </div>
+</div>

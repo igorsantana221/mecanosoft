@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Planos e Assinaturas - The Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#a3c9ff",
+                        "primary-fixed": "#d3e4ff",
+                        "surface-container-highest": "#e0e3e5",
+                        "secondary-fixed": "#cbe7f5",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary-container": "#00544b",
+                        "inverse-primary": "#a3c9ff",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#cbe7f5",
+                        "on-primary-container": "#8abcff",
+                        "surface-dim": "#d8dadc",
+                        "on-secondary-fixed-variant": "#304a55",
+                        "secondary-fixed-dim": "#afcbd8",
+                        "on-tertiary-container": "#63cbbb",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary-fixed-variant": "#004882",
+                        "secondary": "#48626e",
+                        "inverse-surface": "#2d3133",
+                        "background": "#f8f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9fb",
+                        "primary": "#003461",
+                        "tertiary-fixed-dim": "#70d8c8",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#021f29",
+                        "tertiary-fixed": "#8df5e4",
+                        "on-tertiary-fixed-variant": "#005048",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#27609d",
+                        "outline": "#727781",
+                        "on-error": "#ffffff",
+                        "tertiary": "#003b34",
+                        "surface-bright": "#f8f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "outline-variant": "#c2c6d1",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#191c1e",
+                        "on-surface-variant": "#424750",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#00201c",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed": "#001c38",
+                        "on-background": "#191c1e",
+                        "on-secondary-container": "#4e6874",
+                        "primary-container": "#004b87",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for an editorial feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: #c2c6d1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-md fixed top-0 w-full z-40 shadow-sm transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-6 py-3 w-full">
+<div class="text-xl font-bold tracking-tighter text-sky-950 dark:text-sky-50 font-manrope">
+                The Curator
+            </div>
+<div class="flex items-center gap-4 text-sky-900 dark:text-sky-400">
+<span class="material-symbols-outlined cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-full transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-full transition-colors">settings</span>
+<img alt="Foto de perfil do usuário" class="w-8 h-8 rounded-full ml-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFk3Pp66YBB9uOhFi-VVQFxNLzyAhz6jEaGeKnEI5xYSfwhHnmcu3E285NOdNc879TLu3LyFv3KALDl2gW9rK8zhklgLozgqLrdvz2n76obUevtCFyjmYeiW3xYJV5yfVf39hgsCt8H0Dr28CzJvBI3sy9QPOgcxp2YOzHb_0AVJfAGn41zzUZFviGjnd48q5gEbeMx85l-SzQxnlrkTNI-ijGjrsNWX2uxJVvd0uEJNjDIQBsqC_FaB0zrF4vgqtwiVqknoQ_ng"/>
+</div>
+</div>
+<nav class="flex overflow-x-auto px-6 font-manrope text-sm tracking-tight bg-slate-200/20 dark:bg-slate-800/20 hide-scrollbar">
+<a class="py-3 px-4 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors" href="#">Dashboard</a>
+<a class="py-3 px-4 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors" href="#">Orçamentos</a>
+<a class="py-3 px-4 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors" href="#">Clientes</a>
+</nav>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col bg-slate-50 dark:bg-slate-950 h-screen w-64 fixed left-0 top-0 z-50 shadow-none border-r border-slate-100 dark:border-slate-900 transition-all">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined fill text-on-primary">view_quilt</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-sky-950 dark:text-sky-50 leading-tight">Gestão Pro</h2>
+<span class="text-xs text-sky-900 dark:text-sky-400 opacity-70">Plano Premium</span>
+</div>
+</div>
+<nav class="flex flex-col p-4 space-y-2 flex-1 font-inter text-sm font-medium">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg active:scale-95 transition-all hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Visão Geral
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg active:scale-95 transition-all hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">request_quote</span>
+                    Novo Orçamento
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg active:scale-95 transition-all hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+                    Histórico
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg active:scale-95 transition-all hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+                    Clientes
+                </a>
+<!-- Active Nav Item -->
+<a class="flex items-center gap-3 px-4 py-3 bg-sky-50 dark:bg-sky-900/20 text-sky-900 dark:text-sky-400 rounded-lg active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined fill">workspace_premium</span>
+                    Assinatura
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg active:scale-95 transition-all hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+                    Perfil
+                </a>
+</nav>
+<div class="p-4 flex flex-col space-y-2 border-t border-slate-100 dark:border-slate-900 font-inter text-sm font-medium">
+<button class="w-full py-2.5 px-4 bg-primary text-on-primary rounded-lg text-center font-semibold shadow-sm hover:bg-primary-container transition-colors mb-2">Novo Cliente</button>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+                    Sair
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">help</span>
+                    Suporte
+                </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 w-full md:pl-64 pt-24 md:pt-0">
+<!-- Tonal layering: background is surface, content sits on it -->
+<div class="max-w-6xl mx-auto px-6 lg:px-12 py-12 lg:py-20">
+<!-- Editorial Header -->
+<div class="mb-16 md:ml-4 lg:ml-8 max-w-2xl">
+<span class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full text-xs font-semibold text-on-surface-variant tracking-wide uppercase mb-4">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+                        Evolua seu fluxo
+                    </span>
+<h1 class="font-headline text-4xl lg:text-5xl font-extrabold tracking-tight text-primary leading-tight mb-4">
+                        Escolha o plano ideal para sua <br class="hidden lg:block"/>curadoria digital.
+                    </h1>
+<p class="text-lg text-on-surface-variant font-body leading-relaxed">
+                        Desbloqueie ferramentas avançadas e eleve a qualidade das suas propostas comerciais com planos desenhados para profissionais exigentes.
+                    </p>
+</div>
+<!-- Pricing Cards Bento-style Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+<!-- Card: Básico -->
+<div class="bg-surface-container-lowest rounded-xl p-8 flex flex-col ring-1 ring-outline-variant/15 transition-transform hover:-translate-y-1 duration-300">
+<div class="mb-8">
+<h3 class="font-headline text-xl font-bold text-primary mb-2">Básico</h3>
+<p class="text-sm text-on-surface-variant h-10">Para profissionais iniciando a transição digital.</p>
+</div>
+<div class="mb-8 flex items-baseline gap-1">
+<span class="font-headline text-4xl font-extrabold text-on-surface">R$ 0</span>
+<span class="text-sm text-on-surface-variant">/mês</span>
+</div>
+<ul class="space-y-4 mb-10 flex-1">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface">Até 5 orçamentos por mês</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface">Gestão de clientes básica</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline-variant text-xl shrink-0">remove</span>
+<span class="text-sm text-outline">Templates personalizados</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline-variant text-xl shrink-0">remove</span>
+<span class="text-sm text-outline">Suporte prioritário</span>
+</li>
+</ul>
+<button class="w-full py-3 px-4 bg-surface-container-highest text-on-surface font-semibold rounded-lg hover:bg-surface-container-high transition-colors">
+                            Plano Atual
+                        </button>
+</div>
+<!-- Card: Pro (Highlight) -->
+<div class="relative bg-surface-container-lowest rounded-xl p-8 flex flex-col ring-2 ring-primary shadow-[0_8px_32px_-8px_rgba(25,28,30,0.06)] transform lg:-translate-y-4 transition-transform hover:-translate-y-5 duration-300">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full text-xs font-bold tracking-wide shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">stars</span>
+                            Mais Popular
+                        </div>
+<div class="mb-8 mt-2">
+<h3 class="font-headline text-2xl font-bold text-primary mb-2">Pro</h3>
+<p class="text-sm text-on-surface-variant h-10">O padrão corporativo para curadores experientes.</p>
+</div>
+<div class="mb-8 flex items-baseline gap-1">
+<span class="font-headline text-5xl font-extrabold text-on-surface tracking-tighter">R$ 89</span>
+<span class="text-sm text-on-surface-variant">/mês</span>
+</div>
+<ul class="space-y-4 mb-10 flex-1">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface font-medium">Orçamentos ilimitados</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface font-medium">Gestão avançada em CRM</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface font-medium flex items-center gap-2">
+                                    Templates Premium
+                                    <span class="px-1.5 py-0.5 bg-primary-fixed text-on-primary-fixed-variant text-[10px] rounded uppercase font-bold tracking-wider">Novo</span>
+</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface font-medium">Suporte prioritário (24h)</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface font-medium">Exportação em PDF blindado</span>
+</li>
+</ul>
+<button class="w-full py-3.5 px-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-lg shadow-md hover:shadow-lg transition-all hover:opacity-95 flex justify-center items-center gap-2">
+                            Fazer Upgrade
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Card: Enterprise -->
+<div class="bg-surface-container-lowest rounded-xl p-8 flex flex-col ring-1 ring-outline-variant/15 transition-transform hover:-translate-y-1 duration-300">
+<div class="mb-8">
+<h3 class="font-headline text-xl font-bold text-primary mb-2">Enterprise</h3>
+<p class="text-sm text-on-surface-variant h-10">Para equipes estruturadas e volume massivo.</p>
+</div>
+<div class="mb-8 flex items-baseline gap-1">
+<span class="font-headline text-4xl font-extrabold text-on-surface">R$ 249</span>
+<span class="text-sm text-on-surface-variant">/mês</span>
+</div>
+<ul class="space-y-4 mb-10 flex-1">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface">Tudo do plano Pro</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface">Acesso multi-usuário (Até 10)</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface">API para integrações</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0">check_circle</span>
+<span class="text-sm text-on-surface">Gerente de sucesso dedicado</span>
+</li>
+</ul>
+<button class="w-full py-3 px-4 border border-outline-variant text-primary font-semibold rounded-lg hover:bg-surface-container-low transition-colors">
+                            Falar com Vendas
+                        </button>
+</div>
+</div>
+<!-- FAQ Teaser / Footer of content -->
+<div class="mt-20 text-center">
+<p class="text-sm text-on-surface-variant font-body">
+                        Precisa de um plano customizado para mais de 50 usuários? <a class="text-primary font-semibold hover:underline underline-offset-4" href="#">Entre em contato</a>
+</p>
+</div>
+</div>
+<!-- Footer from JSON -->
+<footer class="w-full py-8 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 mt-auto transition tonal flat">
+<div class="flex flex-col md:flex-row justify-between items-center px-10 max-w-6xl mx-auto">
+<div class="font-bold text-slate-900 dark:text-white font-manrope mb-4 md:mb-0">
+                        The Curator
+                    </div>
+<div class="text-center md:text-left mb-4 md:mb-0">
+<p class="font-inter text-xs text-slate-500">© 2024 The Curator. Todos os direitos reservados.</p>
+</div>
+<div class="flex gap-6 font-inter text-xs text-slate-500">
+<a class="text-slate-400 hover:text-sky-500 hover:underline transition-opacity duration-200" href="#">Termos</a>
+<a class="text-slate-400 hover:text-sky-500 hover:underline transition-opacity duration-200" href="#">Privacidade</a>
+<a class="text-slate-400 hover:text-sky-500 hover:underline transition-opacity duration-200" href="#">Ajuda</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

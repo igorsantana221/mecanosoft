@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Novo Orçamento - The Curator</title>
+<!-- Fonts: Manrope (Headlines) & Inter (Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#a3c9ff",
+                    "primary-fixed": "#d3e4ff",
+                    "surface-container-highest": "#e0e3e5",
+                    "secondary-fixed": "#cbe7f5",
+                    "surface-container-low": "#f2f4f6",
+                    "tertiary-container": "#00544b",
+                    "inverse-primary": "#a3c9ff",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#cbe7f5",
+                    "on-primary-container": "#8abcff",
+                    "surface-dim": "#d8dadc",
+                    "on-secondary-fixed-variant": "#304a55",
+                    "secondary-fixed-dim": "#afcbd8",
+                    "on-tertiary-container": "#63cbbb",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-fixed-variant": "#004882",
+                    "secondary": "#48626e",
+                    "inverse-surface": "#2d3133",
+                    "background": "#f8f9fb",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f8f9fb",
+                    "primary": "#003461",
+                    "tertiary-fixed-dim": "#70d8c8",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#021f29",
+                    "tertiary-fixed": "#8df5e4",
+                    "on-tertiary-fixed-variant": "#005048",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#27609d",
+                    "outline": "#727781",
+                    "on-error": "#ffffff",
+                    "tertiary": "#003b34",
+                    "surface-bright": "#f8f9fb",
+                    "surface-container-high": "#e6e8ea",
+                    "outline-variant": "#c2c6d1",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#191c1e",
+                    "on-surface-variant": "#424750",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#00201c",
+                    "surface-container": "#eceef0",
+                    "on-primary-fixed": "#001c38",
+                    "on-background": "#191c1e",
+                    "on-secondary-container": "#4e6874",
+                    "primary-container": "#004b87",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Ambient Shadows & Utilities */
+        .ambient-shadow { box-shadow: 0 8px 32px rgba(25, 28, 30, 0.06); }
+        .ghost-border { ring-1 ring-outline-variant/15; }
+        .input-premium { @apply bg-surface-container-lowest ring-1 ring-outline-variant/15 rounded-lg px-4 py-3 text-on-surface font-body w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface transition-shadow; }
+        .label-premium { @apply block text-sm font-label text-on-surface-variant mb-1.5; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased flex selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Shared Component: SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 z-50 bg-surface-container-lowest flex flex-col p-4 space-y-2 font-inter text-sm font-medium border-r border-outline-variant/10">
+<!-- Header -->
+<div class="px-4 py-6 flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high overflow-hidden flex-shrink-0 ambient-shadow">
+<img alt="Logotipo da Empresa" class="w-full h-full object-cover" data-alt="minimalist geometric abstract logo on light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsrFapP5z4TTWoiNKcO-7AfOrcskuv_Z06UmCbaGHukTPwbXCtlM8SHoiviAqwG1-yXF46lEnPcmg4UJTlMuTcz6JMnk4yTa86MvKJdovB25PHAiy4Pd3nCxZv6PKLi78FOacxbBVQ5NZFDWti2gfzX_4PLXKGdcgtU6glZTEYw_NVv3AbC_-SQkZlxc3SOJqllRZMSk5_DPQOLRyp9vOUFpxEgvON57fyQeNB7VNzxa8tAiPVRZy9s5tA5s98H-ZqxkoUaViXGg"/>
+</div>
+<div>
+<h1 class="text-lg font-black text-primary font-headline tracking-tight">Gestão Pro</h1>
+<p class="text-xs text-on-surface-variant">Plano Premium</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-2 mb-6">
+<button class="w-full py-2.5 px-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg font-medium tracking-wide flex items-center justify-center gap-2 hover:shadow-lg transition-all duration-300">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">add</span>
+                Novo Cliente
+            </button>
+</div>
+<!-- Main Navigation -->
+<div class="flex-1 space-y-1 overflow-y-auto px-2">
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span>Visão Geral</span>
+</a>
+<!-- ACTIVE STATE: Novo Orçamento -->
+<a class="flex items-center gap-3 px-3 py-2.5 bg-secondary-fixed/30 text-primary rounded-lg transition-all font-semibold relative group" href="#">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full"></div>
+<span class="material-symbols-outlined text-[20px]" data-icon="request_quote" style="font-variation-settings: 'FILL' 1;">request_quote</span>
+<span>Novo Orçamento</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="list_alt">list_alt</span>
+<span>Histórico</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="group">group</span>
+<span>Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="workspace_premium">workspace_premium</span>
+<span>Assinatura</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="person">person</span>
+<span>Perfil</span>
+</a>
+</div>
+<!-- Footer Navigation -->
+<div class="pt-4 mt-auto border-t border-outline-variant/10 px-2 pb-2 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="logout">logout</span>
+<span>Sair</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="help">help</span>
+<span>Suporte</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-64 w-full min-h-screen p-8 lg:p-12 xl:p-16 flex justify-center">
+<div class="max-w-[1200px] w-full">
+<!-- Editorial Header -->
+<header class="mb-12 max-w-2xl pl-2">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-low text-primary rounded-full text-xs font-label font-medium tracking-wide mb-4 ring-1 ring-outline-variant/10">
+<span class="material-symbols-outlined text-[14px]">edit_document</span>
+                    Rascunho
+                </div>
+<h2 class="text-[2.5rem] leading-tight font-headline font-bold text-primary tracking-[-0.02em] mb-3">Criar Novo Orçamento</h2>
+<p class="text-on-surface-variant text-lg font-body font-light leading-relaxed">Detalhe os itens, defina valores e gere uma proposta comercial estruturada para o seu cliente.</p>
+</header>
+<form class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Form Details -->
+<div class="xl:col-span-8 space-y-8">
+<!-- Client & Meta Information Card -->
+<section class="bg-surface-container-lowest rounded-[1rem] p-8 ambient-shadow relative overflow-hidden">
+<!-- Decorative gradient corner -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-secondary-fixed-dim/30 rounded-full blur-3xl pointer-events-none"></div>
+<h3 class="text-xl font-headline font-bold text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">person_search</span>
+                            Informações Iniciais
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Client Selection -->
+<div class="md:col-span-2">
+<label class="label-premium">Cliente</label>
+<div class="relative">
+<select class="input-premium appearance-none bg-transparent relative z-10 cursor-pointer">
+<option disabled="" selected="" value="">Selecione um cliente cadastrado...</option>
+<option value="1">Acme Corp</option>
+<option value="2">TechFlow Solutions</option>
+<option value="3">Design Studio B</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none z-0">unfold_more</span>
+</div>
+</div>
+<!-- Title -->
+<div class="md:col-span-2">
+<label class="label-premium">Título do Orçamento</label>
+<input class="input-premium" placeholder="Ex: Redesign de Website e Identidade Visual" type="text"/>
+</div>
+<!-- Dates -->
+<div>
+<label class="label-premium">Data de Emissão</label>
+<input class="input-premium text-on-surface-variant" type="date"/>
+</div>
+<div>
+<label class="label-premium">Validade (Dias)</label>
+<input class="input-premium text-on-surface-variant" placeholder="15" type="number"/>
+</div>
+</div>
+</section>
+<!-- Line Items Card (No-Line Rule Applied) -->
+<section class="bg-surface-container-lowest rounded-[1rem] p-8 ambient-shadow">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-headline font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">format_list_bulleted</span>
+                                Itens do Orçamento
+                            </h3>
+<button class="text-sm font-label font-medium text-primary hover:text-primary-container px-3 py-1.5 rounded-lg hover:bg-surface-container-low transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                                Adicionar Item
+                            </button>
+</div>
+<!-- Pseudo-Table Structure using Grid -->
+<div class="w-full">
+<!-- Headers -->
+<div class="grid grid-cols-12 gap-4 pb-3 text-xs font-label font-medium text-on-surface-variant uppercase tracking-wider pl-2">
+<div class="col-span-6">Descrição</div>
+<div class="col-span-2 text-right">Qtd</div>
+<div class="col-span-2 text-right">Valor Un.</div>
+<div class="col-span-2 text-right">Total</div>
+</div>
+<!-- Item Row 1 -->
+<div class="grid grid-cols-12 gap-4 items-start p-2 mb-2 rounded-xl bg-surface-container-low/50 hover:bg-surface-container-low transition-colors group">
+<div class="col-span-6">
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface font-body p-2" placeholder="Nome do serviço ou produto" type="text" value="Consultoria de UX Design"/>
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-sm text-on-surface-variant font-body p-2 resize-none h-10 mt-1" placeholder="Detalhes (opcional)">Análise heurística e wireframes iniciais.</textarea>
+</div>
+<div class="col-span-2">
+<input class="w-full bg-surface-container-lowest ring-1 ring-outline-variant/20 rounded-lg p-2 text-right focus:outline-none focus:ring-1 focus:ring-primary text-on-surface" type="number" value="1"/>
+</div>
+<div class="col-span-2 relative">
+<span class="absolute left-3 top-2.5 text-on-surface-variant text-sm">R$</span>
+<input class="w-full bg-surface-container-lowest ring-1 ring-outline-variant/20 rounded-lg p-2 pl-8 text-right focus:outline-none focus:ring-1 focus:ring-primary text-on-surface" type="text" value="4.500,00"/>
+</div>
+<div class="col-span-2 flex items-center justify-end pr-2 h-[40px] text-on-surface font-medium">
+                                    R$ 4.500,00
+                                </div>
+</div>
+<!-- Item Row 2 -->
+<div class="grid grid-cols-12 gap-4 items-start p-2 mb-2 rounded-xl bg-surface-container-low/50 hover:bg-surface-container-low transition-colors group">
+<div class="col-span-6">
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface font-body p-2" placeholder="Nome do serviço ou produto" type="text" value="Desenvolvimento Frontend"/>
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-sm text-on-surface-variant font-body p-2 resize-none h-10 mt-1" placeholder="Detalhes (opcional)">Implementação em React e Tailwind CSS.</textarea>
+</div>
+<div class="col-span-2">
+<input class="w-full bg-surface-container-lowest ring-1 ring-outline-variant/20 rounded-lg p-2 text-right focus:outline-none focus:ring-1 focus:ring-primary text-on-surface" type="number" value="80"/>
+<span class="block text-right text-[10px] text-outline mt-1 mr-1">horas</span>
+</div>
+<div class="col-span-2 relative">
+<span class="absolute left-3 top-2.5 text-on-surface-variant text-sm">R$</span>
+<input class="w-full bg-surface-container-lowest ring-1 ring-outline-variant/20 rounded-lg p-2 pl-8 text-right focus:outline-none focus:ring-1 focus:ring-primary text-on-surface" type="text" value="150,00"/>
+</div>
+<div class="col-span-2 flex items-center justify-end pr-2 h-[40px] text-on-surface font-medium">
+                                    R$ 12.000,00
+                                </div>
+</div>
+</div>
+</section>
+<!-- Notes Section -->
+<section class="bg-surface-container-lowest rounded-[1rem] p-8 ambient-shadow">
+<h3 class="text-xl font-headline font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">notes</span>
+                            Observações
+                        </h3>
+<textarea class="input-premium min-h-[120px] resize-y" placeholder="Condições de pagamento, prazos de entrega ou notas adicionais para o cliente..."></textarea>
+</section>
+</div>
+<!-- Right Column: Summary & Actions (Sticky) -->
+<div class="xl:col-span-4 space-y-6 xl:sticky xl:top-8">
+<!-- Summary Card -->
+<div class="bg-surface-container-lowest rounded-[1rem] p-8 ambient-shadow">
+<h4 class="text-sm font-label font-bold text-on-surface-variant uppercase tracking-wider mb-6">Resumo Financeiro</h4>
+<div class="space-y-4 font-body">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Subtotal</span>
+<span>R$ 16.500,00</span>
+</div>
+<!-- Discount/Tax Inputs (Inline) -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm">remove</span>
+<span class="text-on-surface-variant text-sm">Desconto</span>
+<div class="ml-auto w-24 relative">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-outline text-sm">%</span>
+<input class="w-full bg-surface-container-low rounded-md py-1 px-2 text-right text-sm focus:outline-none focus:ring-1 focus:ring-primary" type="text" value="0"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm">add</span>
+<span class="text-on-surface-variant text-sm">Impostos</span>
+<div class="ml-auto w-24 relative">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-outline text-sm">%</span>
+<input class="w-full bg-surface-container-low rounded-md py-1 px-2 text-right text-sm focus:outline-none focus:ring-1 focus:ring-primary" type="text" value="0"/>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/15">
+<div class="flex justify-between items-end">
+<span class="text-on-surface font-medium">Total Estimado</span>
+<span class="text-3xl font-headline font-bold text-primary tracking-tight">R$ 16.500,00</span>
+</div>
+<p class="text-right text-xs text-on-surface-variant mt-2 font-label">BRL - Real Brasileiro</p>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3">
+<button class="w-full py-4 px-6 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-[0.75rem] font-headline font-bold text-lg tracking-wide shadow-[0_4px_14px_rgba(0,52,97,0.25)] hover:shadow-[0_6px_20px_rgba(0,52,97,0.35)] transition-all duration-300 flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+                            Salvar e Emitir
+                        </button>
+<button class="w-full py-3 px-6 bg-surface-container-highest hover:bg-surface-container text-on-surface rounded-[0.75rem] font-label font-medium transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-outline">save</span>
+                            Salvar como Rascunho
+                        </button>
+</div>
+<!-- Status Chip Example (Informational) -->
+<div class="mt-6 flex justify-center">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 bg-tertiary-container/10 rounded-full">
+<div class="w-2 h-2 rounded-full bg-tertiary-container"></div>
+<span class="text-xs font-medium text-tertiary-container font-label">Cálculo Automático Ativo</span>
+</div>
+</div>
+</div>
+</form>
+</div>
+</main>
+</body></html>

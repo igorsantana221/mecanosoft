@@ -1,0 +1,106 @@
+<div
+    class="bg-surface-container-low min-h-screen flex items-center justify-center p-4 sm:p-8 font-body text-on-surface antialiased">
+    <!-- Main Container - Centered to emphasize the clean canvas -->
+    <main class="w-full max-w-[420px]">
+        <!-- Surface Card (Focus Layer) -->
+        <div class="bg-surface-container-lowest rounded-xl shadow-ambient p-8 sm:p-10 relative overflow-hidden">
+            <!-- Subtle decorative gradient at the top right to break complete sterility -->
+            <div
+                class="absolute -top-16 -right-16 w-32 h-32 bg-primary-fixed-dim rounded-full blur-3xl opacity-40 pointer-events-none">
+            </div>
+
+            <!-- Header Section -->
+            <div class="mb-10 relative z-10">
+                <div class="flex items-center justify-center gap-2 mb-6">
+                    <!-- Logo Mecanosoft -->
+                    <img src="logo.png" alt="Logo Mecanosoft" class="w-30 h-20 object-contain" />
+                </div>
+                <h1 class="font-headline text-3xl font-extrabold tracking-tight text-on-surface mb-2">Entrar</h1>
+                <p class="font-body text-sm text-on-surface-variant">Sua oficina em dia!</p>
+            </div>
+
+            <!-- Login Form -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6 relative z-10">
+                <!-- Email Input -->
+                <div class="space-y-2">
+                    <label class="font-label text-sm font-medium text-on-surface block" for="email">E-mail
+                        corporativo</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-outline text-lg">mail</span>
+                        </div>
+                        <input formControlName="email"
+                            class="w-full bg-surface-container-lowest text-on-surface pl-10 pr-4 py-3 rounded-lg font-body text-sm ghost-border focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-fixed transition-all duration-200 placeholder:text-outline-variant"
+                            id="email" name="email" placeholder="seu.nome@empresa.com" required="" type="email" />
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                        <label class="font-label text-sm font-medium text-on-surface block" for="password">Senha</label>
+                        <a class="font-label text-xs font-medium text-primary hover:text-primary-container hover:underline transition-colors"
+                            routerLink="/recovery">
+                            Esqueceu a senha?
+                        </a>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-outline text-lg">lock</span>
+                        </div>
+                        <input formControlName="password"
+                            class="w-full bg-surface-container-lowest text-on-surface pl-10 pr-4 py-3 rounded-lg font-body text-sm ghost-border focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-fixed transition-all duration-200 placeholder:text-outline-variant tracking-widest"
+                            id="password" name="password" placeholder="••••••••" required="" type="password" />
+                    </div>
+                </div>
+
+                <!-- Remember Me -->
+                <div class="flex items-center">
+                    <input
+                        class="h-4 w-4 rounded ghost-border text-primary focus:ring-primary-fixed focus:ring-offset-0 bg-surface-container-lowest cursor-pointer transition-colors"
+                        id="remember-me" name="remember-me" type="checkbox" />
+                    <label class="ml-2 block text-sm font-body text-on-surface-variant cursor-pointer select-none"
+                        for="remember-me">
+                        Lembrar de mim
+                    </label>
+                </div>
+
+                <!-- Primary Action Button -->
+                <button [disabled]="isLoading()"
+                    class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-medium text-sm py-3 px-4 rounded-md shadow-sm hover:shadow-md hover:from-primary-container hover:to-primary transition-all duration-300 flex justify-center items-center gap-2 group cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+                    type="submit">
+                    <ng-container *ngIf="!isLoading()">
+                        Entrar na Plataforma
+                        <span
+                            class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform duration-200">
+                            arrow_forward
+                        </span>
+                    </ng-container>
+                    <ng-container *ngIf="isLoading()">
+                        <span class="material-symbols-outlined text-lg animate-spin">
+                            progress_activity
+                        </span>
+                        Entrando...
+                    </ng-container>
+                </button>
+            </form>
+
+            <!-- Footer Link -->
+            <div class="mt-8 pt-6 border-t border-surface-container-highest text-center relative z-10">
+                <p class="font-body text-sm text-on-surface-variant">
+                    Ainda não tem acesso?
+                    <a class="font-label font-medium text-primary hover:text-primary-container hover:underline transition-colors ml-1"
+                        routerLink="/register">
+                        Criar uma conta
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Optional environmental detail outside the card -->
+        <div class="mt-8 text-center">
+            <span class="font-headline text-xs text-on-surface-variant tracking-widest uppercase opacity-60">Ambiente
+                Seguro</span>
+        </div>
+    </main>
+</div>

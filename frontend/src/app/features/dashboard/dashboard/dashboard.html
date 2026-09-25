@@ -1,0 +1,124 @@
+<div class="p-6 md:p-10 lg:p-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div class="mb-10 ml-2">
+        <h2 class="text-3xl md:text-4xl font-headline font-bold text-primary tracking-tight mb-2">Bom dia, Roberto.</h2>
+        <p class="text-on-surface-variant font-body">Aqui está o resumo das suas operações hoje.</p>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <!-- KPI 1 -->
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-ambient flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+            <div class="flex justify-between items-start mb-6">
+                <div class="p-3 bg-surface-container-low rounded-lg text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                    <span class="material-symbols-outlined">account_balance_wallet</span>
+                </div>
+                <span class="bg-tertiary-container text-on-tertiary-container px-2.5 py-1 rounded-md text-xs font-bold font-label tracking-wide">+12%</span>
+            </div>
+            <div>
+                <p class="text-sm font-label text-on-surface-variant mb-1">Faturamento Mensal</p>
+                <p class="text-3xl font-headline font-extrabold text-primary tracking-tighter">R$ 45.200</p>
+            </div>
+        </div>
+
+        <!-- KPI 2 -->
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-ambient flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+            <div class="flex justify-between items-start mb-6">
+                <div class="p-3 bg-surface-container-low rounded-lg text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                    <span class="material-symbols-outlined">pending_actions</span>
+                </div>
+            </div>
+            <div>
+                <p class="text-sm font-label text-on-surface-variant mb-1">Orçamentos Pendentes</p>
+                <p class="text-3xl font-headline font-extrabold text-primary tracking-tighter">12</p>
+            </div>
+        </div>
+
+        <!-- KPI 3 -->
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-ambient flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+            <div class="flex justify-between items-start mb-6">
+                <div class="p-3 bg-surface-container-low rounded-lg text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                    <span class="material-symbols-outlined">groups</span>
+                </div>
+                <span class="bg-tertiary-container text-on-tertiary-container px-2.5 py-1 rounded-md text-xs font-bold font-label tracking-wide">Estável</span>
+            </div>
+            <div>
+                <p class="text-sm font-label text-on-surface-variant mb-1">Clientes Ativos</p>
+                <p class="text-3xl font-headline font-extrabold text-primary tracking-tighter">148</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Complex Area: Chart & List -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Chart Placeholder -->
+        <div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-ambient">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-lg font-headline font-bold text-primary">Receita vs. Meta</h3>
+                <button class="text-sm text-primary font-medium flex items-center gap-1 hover:text-primary-container transition-colors">
+                    Este Ano <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                </button>
+            </div>
+            <!-- CSS Bar Chart Representation -->
+            <div class="h-64 flex items-end justify-between gap-2 md:gap-4 pb-2 relative">
+                <!-- Y-Axis Lines (Decorative) -->
+                <div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+                    <div class="w-full h-px bg-surface-variant/30"></div>
+                    <div class="w-full h-px bg-surface-variant/30"></div>
+                    <div class="w-full h-px bg-surface-variant/30"></div>
+                    <div class="w-full h-px bg-surface-variant/30"></div>
+                </div>
+                <!-- Bars -->
+                <div class="w-full bg-surface-container-highest rounded-t-md h-[40%] relative group transition-all duration-300 hover:scale-x-110"><div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary-container rounded-t-md h-[60%]"></div></div>
+                <div class="w-full bg-surface-container-highest rounded-t-md h-[60%] relative group transition-all duration-300 hover:scale-x-110"><div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary-container rounded-t-md h-[80%]"></div></div>
+                <div class="w-full bg-surface-container-highest rounded-t-md h-[50%] relative group transition-all duration-300 hover:scale-x-110"><div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary-container rounded-t-md h-[40%]"></div></div>
+                <div class="w-full bg-surface-container-highest rounded-t-md h-[80%] relative group transition-all duration-300 hover:scale-x-110"><div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary-container rounded-t-md h-[90%]"></div></div>
+                <div class="w-full bg-surface-container-highest rounded-t-md h-[70%] relative group transition-all duration-300 hover:scale-x-110"><div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary-container rounded-t-md h-[70%]"></div></div>
+                <div class="w-full bg-surface-container-highest rounded-t-md h-[90%] relative group transition-all duration-300 hover:scale-x-110"><div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary-container rounded-t-md h-[100%]"></div></div>
+                <div class="w-full bg-surface-container-highest rounded-t-md h-[60%] relative group transition-all duration-300 hover:scale-x-110"><div class="absolute bottom-0 w-full bg-gradient-to-t from-primary to-primary-container rounded-t-md h-[50%]"></div></div>
+            </div>
+            <div class="flex justify-between mt-4 text-xs font-label text-on-surface-variant px-2">
+                <span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span><span>Mai</span><span>Jun</span><span>Jul</span>
+            </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="bg-surface-container-lowest rounded-xl p-8 shadow-ambient">
+            <h3 class="text-lg font-headline font-bold text-primary mb-6">Atividades Recentes</h3>
+            <div class="space-y-4">
+                <div class="flex items-start gap-4 group p-3 hover:bg-surface-container-low rounded-lg transition-all duration-200 cursor-pointer">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">check_circle</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Orçamento Aprovado</p>
+                        <p class="text-xs text-on-surface-variant font-label">TechCorp Inc. aprovou a proposta #0042.</p>
+                        <p class="text-[10px] text-outline mt-1 font-bold uppercase tracking-wider">Há 2 horas</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 group p-3 hover:bg-surface-container-low rounded-lg transition-all duration-200 cursor-pointer">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">person_add</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Novo Cliente</p>
+                        <p class="text-xs text-on-surface-variant font-label">Maria Silva foi adicionada ao sistema.</p>
+                        <p class="text-[10px] text-outline mt-1 font-bold uppercase tracking-wider">Hoje, 09:30</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 group p-3 hover:bg-surface-container-low rounded-lg transition-all duration-200 cursor-pointer">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">mail</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Fatura Enviada</p>
+                        <p class="text-xs text-on-surface-variant font-label">Fatura enviada para DesignStudio.</p>
+                        <p class="text-[10px] text-outline mt-1 font-bold uppercase tracking-wider">Ontem, 16:45</p>
+                    </div>
+                </div>
+            </div>
+            <button class="w-full mt-6 text-sm font-headline font-bold text-primary hover:bg-primary/5 rounded-lg transition-all py-3 border border-primary/20">
+                Ver todo o histórico
+            </button>
+        </div>
+    </div>
+</div>

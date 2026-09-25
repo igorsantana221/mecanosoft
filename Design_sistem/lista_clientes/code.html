@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#321300",
+                    "surface-container-highest": "#e0e3e6",
+                    "on-tertiary-container": "#ffa46a",
+                    "surface-dim": "#d8dadd",
+                    "primary-fixed-dim": "#a3c9ff",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e0e3e6",
+                    "primary-fixed": "#d3e4ff",
+                    "tertiary-fixed": "#ffdbc8",
+                    "inverse-on-surface": "#eff1f4",
+                    "surface-container": "#eceef1",
+                    "secondary-container": "#cee1ff",
+                    "secondary-fixed-dim": "#b5c8e5",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#d3e4ff",
+                    "surface-container-high": "#e6e8eb",
+                    "secondary": "#4e5f79",
+                    "surface-container-low": "#f2f4f7",
+                    "on-secondary-container": "#52647d",
+                    "inverse-primary": "#a3c9ff",
+                    "surface-bright": "#f7f9fc",
+                    "primary-container": "#004b87",
+                    "outline-variant": "#c2c6d1",
+                    "primary": "#003461",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#424750",
+                    "on-primary-fixed": "#001c38",
+                    "surface-tint": "#27609d",
+                    "on-surface": "#191c1e",
+                    "on-primary-container": "#8abcff",
+                    "on-background": "#191c1e",
+                    "on-secondary-fixed": "#081c33",
+                    "error": "#ba1a1a",
+                    "surface": "#f7f9fc",
+                    "tertiary": "#572500",
+                    "outline": "#727781",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#753400",
+                    "on-secondary": "#ffffff",
+                    "background": "#f7f9fc",
+                    "on-primary-fixed-variant": "#004882",
+                    "inverse-surface": "#2d3133",
+                    "tertiary-fixed-dim": "#ffb68b",
+                    "tertiary-container": "#793701",
+                    "on-secondary-fixed-variant": "#364860"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-manrope { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { background: rgba(247, 249, 252, 0.8); backdrop-filter: blur(24px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-50 flex flex-col py-6 px-4 gap-4 z-50">
+<div class="px-2 mb-4">
+<h2 class="text-lg font-black text-blue-950">Architect Admin</h2>
+<p class="text-xs text-slate-500 font-medium">Gestão Editorial</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 font-manrope text-sm font-semibold hover:text-blue-800 transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-blue-900 bg-white shadow-sm rounded-lg font-manrope text-sm font-semibold transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 font-manrope text-sm font-semibold hover:text-blue-800 transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span>Projetos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 font-manrope text-sm font-semibold hover:text-blue-800 transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Relatórios</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 font-manrope text-sm font-semibold hover:text-blue-800 transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Configurações</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 pt-4 border-t border-slate-200">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-3 rounded-xl font-semibold text-sm mb-4 shadow-sm hover:opacity-90 transition-all">
+                Novo Cliente
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 font-manrope text-sm font-semibold hover:text-blue-800 transition-all" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span>Suporte</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 font-manrope text-sm font-semibold hover:text-blue-800 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Sair</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-40 bg-white/80 backdrop-blur-xl shadow-sm flex justify-between items-center px-8 h-16">
+<div class="flex items-center gap-8 flex-1">
+<h1 class="text-xl font-bold tracking-tight text-blue-900 font-manrope">Lista de Clientes</h1>
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-slate-100 border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary-container/20 focus:bg-white transition-all" placeholder="Buscar clientes..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-on-surface">Ana Silva</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider">Administrador</p>
+</div>
+<img alt="Avatar do Usuário" class="h-10 w-10 rounded-full object-cover ring-2 ring-white shadow-sm" data-alt="professional headshot of a smiling woman with glasses in a modern office setting, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPtatS8wVz4klX6trR71WRvouOkamcDm9f14r3wtK-PDBUDcldkODnPE3GxI9_4oxKofow-gP3uCLLaeKW9_3lhDPF6KSG_CxuXhYrHF-Tt5DKsRUOPzL1u_JXSIqpKNTz3eEtwumvzR2QuxbjAx60OfpOoAjtF3AUwqykw8zjhA-rv3tUdFhorjI-pGX2d57kLS-h-oUt4rzW_aAivqJbu7WxYDtZ5dQ9y0XXBb_euu9vk6PSRgb8hgA8CUJ-S282VVBh6LYKWA"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-8 space-y-8 flex-1 bg-surface-container-low">
+<!-- Filters & Actions Area -->
+<section class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex flex-wrap items-center justify-between gap-6">
+<div class="flex flex-wrap items-center gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-[10px] font-bold text-slate-400 uppercase px-1">Status</label>
+<select class="bg-surface-container-low border-none rounded-lg text-sm font-medium py-2.5 px-4 focus:ring-2 focus:ring-surface-tint/20 cursor-pointer">
+<option>Todos os Status</option>
+<option>Novo</option>
+<option>Antigo</option>
+<option>Inativo</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[10px] font-bold text-slate-400 uppercase px-1">Data de Cadastro</label>
+<input class="bg-surface-container-low border-none rounded-lg text-sm font-medium py-2.5 px-4 focus:ring-2 focus:ring-surface-tint/20 cursor-pointer" type="date"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[10px] font-bold text-slate-400 uppercase px-1">Tipo de Cliente</label>
+<div class="flex gap-2">
+<button class="px-4 py-2.5 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold transition-all">Corporativo</button>
+<button class="px-4 py-2.5 bg-surface-container-high text-on-surface-variant rounded-full text-xs font-bold hover:bg-surface-container-highest transition-all">Individual</button>
+</div>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold text-sm shadow-md flex items-center gap-2 hover:translate-y-[-1px] transition-all">
+<span class="material-symbols-outlined text-lg">person_add</span>
+                        Novo Cliente
+                    </button>
+</div>
+</section>
+<!-- Clients Table -->
+<section class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 border-b border-outline-variant/10">
+<th class="px-6 py-4 text-[11px] font-black text-slate-500 uppercase tracking-widest">Nome do Cliente</th>
+<th class="px-6 py-4 text-[11px] font-black text-slate-500 uppercase tracking-widest">Email</th>
+<th class="px-6 py-4 text-[11px] font-black text-slate-500 uppercase tracking-widest">Telefone</th>
+<th class="px-6 py-4 text-[11px] font-black text-slate-500 uppercase tracking-widest text-center">Status</th>
+<th class="px-6 py-4 text-[11px] font-black text-slate-500 uppercase tracking-widest text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 font-bold">BR</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Bruno Rodrigues</p>
+<p class="text-xs text-slate-400">ID: #00421</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">bruno.r@techflow.com</td>
+<td class="px-6 py-5 text-sm text-slate-600">(11) 98765-4321</td>
+<td class="px-6 py-5 text-center">
+<span class="px-3 py-1 bg-green-50 text-green-700 text-[10px] font-bold rounded-full uppercase">Novo</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold">AM</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Alice Martins</p>
+<p class="text-xs text-slate-400">ID: #00398</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">alice.martins@designly.io</td>
+<td class="px-6 py-5 text-sm text-slate-600">(21) 97722-1100</td>
+<td class="px-6 py-5 text-center">
+<span class="px-3 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold rounded-full uppercase">Antigo</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">GC</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Gabriel Costa</p>
+<p class="text-xs text-slate-400">ID: #00385</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">g.costa@vanguard.br</td>
+<td class="px-6 py-5 text-sm text-slate-600">(31) 99188-3344</td>
+<td class="px-6 py-5 text-center">
+<span class="px-3 py-1 bg-green-50 text-green-700 text-[10px] font-bold rounded-full uppercase">Novo</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-600 font-bold">MT</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Mariana Terra</p>
+<p class="text-xs text-slate-400">ID: #00342</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">mari.terra@gmail.com</td>
+<td class="px-6 py-5 text-sm text-slate-600">(41) 98877-6655</td>
+<td class="px-6 py-5 text-center">
+<span class="px-3 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold rounded-full uppercase">Antigo</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-rose-100 flex items-center justify-center text-rose-600 font-bold">JP</div>
+<div>
+<p class="text-sm font-bold text-on-surface">João Paulo</p>
+<p class="text-xs text-slate-400">ID: #00311</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600">jp.silva@outlook.com</td>
+<td class="px-6 py-5 text-sm text-slate-600">(11) 91234-5678</td>
+<td class="px-6 py-5 text-center">
+<span class="px-3 py-1 bg-red-50 text-red-700 text-[10px] font-bold rounded-full uppercase">Inativo</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 flex items-center justify-between bg-surface-container-low/50">
+<p class="text-xs text-slate-500">Mostrando <span class="font-bold">1-5</span> de <span class="font-bold">124</span> clientes</p>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/20 hover:bg-white text-slate-400 hover:text-primary transition-all disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold text-xs shadow-sm">
+                            1
+                        </button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/20 hover:bg-white text-slate-600 font-bold text-xs transition-all">
+                            2
+                        </button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/20 hover:bg-white text-slate-600 font-bold text-xs transition-all">
+                            3
+                        </button>
+<span class="text-slate-400 px-1">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/20 hover:bg-white text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Bottom Stats / Quick View (Editorial Feel) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+<div class="flex items-center justify-between mb-2">
+<p class="text-xs font-bold text-primary uppercase tracking-widest">Taxa de Conversão</p>
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<p class="text-3xl font-black text-blue-900 font-manrope">24.8%</p>
+<p class="text-xs text-slate-500 mt-2">+4.2% em relação ao mês passado</p>
+</div>
+<div class="bg-secondary-container/20 p-6 rounded-2xl border border-secondary-container/30">
+<div class="flex items-center justify-between mb-2">
+<p class="text-xs font-bold text-on-secondary-container uppercase tracking-widest">Ticket Médio</p>
+<span class="material-symbols-outlined text-on-secondary-container">payments</span>
+</div>
+<p class="text-3xl font-black text-blue-900 font-manrope">R$ 1.250</p>
+<p class="text-xs text-slate-500 mt-2">Valor acumulado por cliente ativo</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10">
+<div class="flex items-center justify-between mb-2">
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest">NPS Geral</p>
+<span class="material-symbols-outlined text-amber-500">grade</span>
+</div>
+<p class="text-3xl font-black text-blue-900 font-manrope">72</p>
+<div class="w-full bg-slate-100 h-1.5 rounded-full mt-4">
+<div class="bg-primary h-full rounded-full" style="width: 72%"></div>
+</div>
+</div>
+</section>
+</div>
+<footer class="px-8 py-4 text-center">
+<p class="text-[10px] text-slate-400 font-medium tracking-widest uppercase">Azure Ethos Design System • Portal Corporativo © 2024</p>
+</footer>
+</main>
+</body></html>

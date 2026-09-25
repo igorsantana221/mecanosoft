@@ -1,0 +1,103 @@
+@use '@angular/material' as mat;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}
+
+@utility shadow-ambient {
+  box-shadow: 0 16px 32px rgba(25, 28, 30, 0.06);
+}
+
+@utility ghost-border {
+  border: 1px solid rgba(194, 198, 209, 0.4);
+}
+
+// Custom Snackbar Styles
+.success-snackbar {
+  --mdc-snackbar-container-color: #10b981;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffffff;
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #ef4444;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffffff;
+}
+
+// Global Print styles
+@media print {
+  aside,
+  header,
+  .no-print {
+    display: none !important;
+  }
+
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Disable layout flex scroll wrappers during print */
+  div.flex.h-screen,
+  .h-screen,
+  .h-full,
+  .overflow-hidden,
+  .overflow-y-auto,
+  main.flex-1 {
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+    position: static !important;
+  }
+
+  .flex-1 {
+    flex: none !important;
+    width: 100% !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: white !important;
+  }
+
+  .print-area {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    background: white !important;
+    z-index: 9999 !important;
+  }
+}

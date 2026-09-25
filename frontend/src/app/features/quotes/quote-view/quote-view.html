@@ -1,0 +1,157 @@
+@if (isLoading()) {
+    <div class="flex items-center justify-center min-h-[50vh]">
+        <span class="material-symbols-outlined text-4xl text-primary animate-spin">progress_activity</span>
+    </div>
+} @else if (quote()) {
+    <div class="max-w-[1000px] mx-auto w-full p-4 md:p-8 animate-in fade-in duration-500">
+        
+        <!-- ActionBar (Hidden in Print) -->
+        <div class="no-print flex flex-col md:flex-row items-center justify-between gap-4 mb-8 bg-surface-container-lowest p-4 rounded-2xl shadow-ambient">
+            <button routerLink="/quotes" class="px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-xl font-headline font-bold text-sm flex items-center gap-2 transition-all">
+                <span class="material-symbols-outlined text-sm">arrow_back</span>
+                Voltar
+            </button>
+
+            <div class="flex flex-wrap items-center gap-3">
+                <button [routerLink]="['/quotes', quote()?.id, 'edit']" class="px-4 py-2.5 bg-surface-container-high hover:bg-surface-variant text-on-surface rounded-xl font-headline font-bold text-sm flex items-center gap-2 transition-all">
+                    <span class="material-symbols-outlined text-sm">edit</span>
+                    Editar
+                </button>
+                <button (click)="printQuote()" class="px-4 py-2.5 bg-surface-container-high hover:bg-surface-variant text-on-surface rounded-xl font-headline font-bold text-sm flex items-center gap-2 transition-all">
+                    <span class="material-symbols-outlined text-sm">print</span>
+                    Imprimir / PDF
+                </button>
+                <button (click)="sendWhatsApp()" class="px-4 py-2.5 bg-[#25D366]/10 text-[#128C7E] hover:bg-[#25D366]/20 rounded-xl font-headline font-bold text-sm flex items-center gap-2 transition-all">
+                    <span class="material-symbols-outlined text-sm">chat</span>
+                    WhatsApp
+                </button>
+                <button (click)="sendEmail()" [disabled]="isSendingEmail()" class="px-5 py-2.5 bg-primary text-on-primary hover:opacity-90 rounded-xl font-headline font-bold text-sm flex items-center gap-2 transition-all disabled:opacity-50">
+                    @if (isSendingEmail()) {
+                        <span class="material-symbols-outlined text-sm animate-spin">progress_activity</span>
+                        Enviando...
+                    } @else {
+                        <span class="material-symbols-outlined text-sm">mail</span>
+                        Enviar E-mail
+                    }
+                </button>
+            </div>
+        </div>
+
+        <!-- PRINT AREA: The actual Quote Document -->
+        <div class="print-area bg-white text-black p-8 md:p-12 rounded-2xl shadow-lg border border-outline-variant/20 min-h-[800px]">
+            
+            <!-- Document Header -->
+            <header class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-primary/20 pb-8 mb-8">
+                <!-- Logo & Company Placeholder -->
+                <div class="flex items-center gap-4 mb-6 md:mb-0">
+                    <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+                        <span class="material-symbols-outlined text-3xl text-primary">domain</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-black text-primary tracking-tight">{{ companyInfo.name }}</h1>
+                        <p class="text-xs text-gray-500 font-mono mt-1">CNPJ: {{ companyInfo.cnpj }}</p>
+                        <p class="text-xs text-gray-500 mt-0.5">{{ companyInfo.email }} • {{ companyInfo.phone }}</p>
+                    </div>
+                </div>
+
+                <!-- Quote Meta -->
+                <div class="text-left md:text-right">
+                    <h2 class="text-3xl font-black text-gray-800 tracking-tighter">{{ quote()?.number }}</h2>
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-[10px] font-bold uppercase tracking-wider mt-2 mb-3">
+                        Status: {{ getStatusLabel(quote()?.status) }}
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <p><span class="font-bold">Emissão:</span> {{ quote()?.issueDate | date:'dd/MM/yyyy' }}</p>
+                        <p><span class="font-bold">Validade:</span> {{ quote()?.validityDays }} dias</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Customer Info -->
+            <section class="mb-10 bg-gray-50 p-6 rounded-xl border border-gray-100">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Proposta Para</h3>
+                <h4 class="text-xl font-bold text-gray-800 mb-1">{{ quote()?.customerName }}</h4>
+                <!-- Em um cenário real, aqui entraria endereço e cnpj do cliente -->
+                <p class="text-sm text-gray-600 font-medium">{{ quote()?.title }}</p>
+            </section>
+
+            <!-- Line Items Table -->
+            <section class="mb-12">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b-2 border-gray-200">
+                            <th class="py-4 px-2 text-xs font-bold text-gray-500 uppercase tracking-widest w-1/2">Item & Descrição</th>
+                            <th class="py-4 px-2 text-xs font-bold text-gray-500 uppercase tracking-widest text-center w-1/6">Qtd</th>
+                            <th class="py-4 px-2 text-xs font-bold text-gray-500 uppercase tracking-widest text-right w-1/6">Valor Un.</th>
+                            <th class="py-4 px-2 text-xs font-bold text-gray-500 uppercase tracking-widest text-right w-1/6">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        @for (item of quote()?.items; track item.id) {
+                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-2">
+                                    <p class="font-bold text-gray-800">{{ item.description }}</p>
+                                    @if (item.details) {
+                                        <p class="text-xs text-gray-500 mt-1 whitespace-pre-wrap">{{ item.details }}</p>
+                                    }
+                                </td>
+                                <td class="py-4 px-2 text-center font-medium text-gray-600">{{ item.quantity }}</td>
+                                <td class="py-4 px-2 text-right font-medium text-gray-600">{{ item.unitPrice | currency:'BRL' }}</td>
+                                <td class="py-4 px-2 text-right font-bold text-gray-800">{{ item.subtotal | currency:'BRL' }}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Totals & Notes -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Notes -->
+                <div class="order-2 md:order-1">
+                    @if (quote()?.notes) {
+                        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Observações e Condições</h3>
+                        <p class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">{{ quote()?.notes }}</p>
+                    }
+                </div>
+
+                <!-- Totals -->
+                <div class="order-1 md:order-2 bg-gray-50 p-6 rounded-xl border border-gray-100">
+                    <div class="space-y-3 text-sm">
+                        <!-- Calculando o Subtotal real da soma dos itens para bater com os impostos -->
+                        <div class="flex justify-between text-gray-600">
+                            <span>Subtotal Itens</span>
+                            <span class="font-bold">
+                                {{ (quote()?.total || 0) / (1 + ((quote()?.tax || 0)/100)) / (1 - ((quote()?.discount || 0)/100)) | currency:'BRL' }}
+                            </span>
+                        </div>
+                        
+                        @if (quote()?.discount! > 0) {
+                            <div class="flex justify-between text-gray-600">
+                                <span>Desconto ({{ quote()?.discount }}%)</span>
+                                <span class="font-bold text-red-600">-</span>
+                            </div>
+                        }
+
+                        @if (quote()?.tax! > 0) {
+                            <div class="flex justify-between text-gray-600">
+                                <span>Impostos ({{ quote()?.tax }}%)</span>
+                                <span class="font-bold">+</span>
+                            </div>
+                        }
+                        
+                        <div class="pt-4 mt-4 border-t border-gray-200 flex flex-col items-end">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Total da Proposta</span>
+                            <span class="text-4xl font-black text-primary tracking-tighter">{{ quote()?.total | currency:'BRL' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="mt-20 pt-8 border-t border-gray-200 text-center text-xs text-gray-400 font-medium">
+                Documento gerado através do sistema. Este orçamento é válido por {{ quote()?.validityDays }} dias a partir da data de emissão.
+            </footer>
+
+        </div>
+    </div>
+}

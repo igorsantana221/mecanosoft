@@ -1,0 +1,5 @@
+npx @vudovn/ag-kit init
+
+criar um dev plan o nome é MonkOrc, sistema web com posibilidade de uso no mobile.
+
+o sistema tera as principais telas como  login, recuperação de senha, registro, perfil de usuario. novo orçamento,lista de orçamento para consultas, cadastro de produtos, assinatura e planos.

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html class="antialiased" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recuperar Senha - ArchitectCurator</title>
+<!-- Google Fonts: Manrope (Display) & Inter (Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#727781",
+                    "on-surface": "#191c1e",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#d3e4ff",
+                    "on-secondary-fixed-variant": "#364860",
+                    "tertiary-fixed": "#ffdbc8",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#321300",
+                    "surface-variant": "#e0e3e6",
+                    "secondary-fixed": "#d3e4ff",
+                    "on-surface-variant": "#424750",
+                    "tertiary-container": "#793701",
+                    "tertiary": "#572500",
+                    "surface": "#f7f9fc",
+                    "primary": "#003461",
+                    "on-background": "#191c1e",
+                    "background": "#f7f9fc",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#001c38",
+                    "on-secondary-fixed": "#081c33",
+                    "inverse-surface": "#2d3133",
+                    "tertiary-fixed-dim": "#ffb68b",
+                    "surface-bright": "#f7f9fc",
+                    "inverse-primary": "#a3c9ff",
+                    "surface-container": "#eceef1",
+                    "surface-tint": "#27609d",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#b5c8e5",
+                    "inverse-on-surface": "#eff1f4",
+                    "secondary-container": "#cee1ff",
+                    "outline-variant": "#c2c6d1",
+                    "secondary": "#4e5f79",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#a3c9ff",
+                    "surface-container-low": "#f2f4f7",
+                    "surface-container-high": "#e6e8eb",
+                    "on-tertiary-container": "#ffa46a",
+                    "surface-dim": "#d8dadd",
+                    "on-secondary-container": "#52647d",
+                    "error": "#ba1a1a",
+                    "primary-container": "#004b87",
+                    "on-primary-container": "#8abcff",
+                    "surface-container-highest": "#e0e3e6",
+                    "on-tertiary-fixed-variant": "#753400",
+                    "on-primary-fixed-variant": "#004882"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Manrope", "sans-serif"
+                    ],
+                    "body": [
+                            "Inter", "sans-serif"
+                    ],
+                    "label": [
+                            "Inter", "sans-serif"
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom styles for input focus based on Design System */
+        .ds-input:focus {
+            background-color: theme('colors.surface-container-lowest');
+            box-shadow: 0 0 0 2px theme('colors.surface-tint');
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex items-center justify-center relative overflow-hidden">
+<!-- Atmospheric Background Layer -->
+<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+<!-- Abstract architectural texture -->
+<div class="absolute inset-0 opacity-10 bg-cover bg-center mix-blend-multiply" data-alt="abstract architectural facade with clean geometric lines and soft natural daylight, high-end editorial photography" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDZ6BVa7IGPOvU718UjUgVAX0xu0uknpkqyT3a60eobEXTMh856-RudyxJ2UFptPfcgsMvjCk66ghkk2sEfnb7o_7MLjCYg8_HMQSIs9pRUIcDrCanvaiRU-OrCA0yqdnl67xXj34SHI4v6QjlWjl2YiC-PYXmW-sUGBQzjdYOCcLixg8LJ1VT8GEp9SrbeWDv4ZuU2ahcS4ivVj-n7N_oU5ZINvkTU6qAmUV72Ln4e7rS1EbfY3wy6H6XlZGRbUfaK8viPdML3bw');">
+</div>
+<!-- Gradient to ensure legibility and surface tone -->
+<div class="absolute inset-0 bg-gradient-to-br from-surface via-surface/90 to-surface-container-low/80"></div>
+<!-- Soft decorative glow -->
+<div class="absolute -top-40 -right-40 w-96 h-96 bg-primary-fixed-dim rounded-full mix-blend-multiply filter blur-[100px] opacity-30"></div>
+<div class="absolute -bottom-40 -left-40 w-[30rem] h-[30rem] bg-secondary-fixed rounded-full mix-blend-multiply filter blur-[120px] opacity-20"></div>
+</div>
+<!-- Main Content Canvas (Transactional/Linear flow -> No standard Shell Nav) -->
+<main class="relative z-10 w-full max-w-md px-6 py-12 flex flex-col items-center">
+<!-- Brand Anchor -->
+<div class="mb-10 text-center">
+<h1 class="font-headline text-3xl font-extrabold tracking-tight text-primary">
+                ArchitectCurator
+            </h1>
+</div>
+<!-- Floating Card with Ambient Shadow -->
+<div class="w-full bg-surface-container-lowest rounded-3xl p-8 sm:p-12 shadow-[0_40px_60px_-10px_rgba(25,28,30,0.06)] flex flex-col items-center">
+<!-- Header section with Editorial Scale -->
+<div class="w-full text-center mb-8">
+<h2 class="font-headline text-2xl sm:text-3xl font-bold text-on-surface mb-4">
+                    Recuperar Senha
+                </h2>
+<p class="font-body text-base text-on-surface-variant leading-relaxed px-2">
+                    Não se preocupe. Digite o e-mail associado à sua conta e enviaremos um link para redefinir sua senha.
+                </p>
+</div>
+<!-- Form -->
+<form action="#" class="w-full flex flex-col gap-6" method="POST">
+<!-- Email Input Field -->
+<div class="relative group w-full">
+<label class="sr-only" for="email">Endereço de E-mail</label>
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-on-surface-variant group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<input class="ds-input w-full bg-surface-container-low text-on-surface border-none rounded-md py-4 pl-12 pr-4 font-body text-base placeholder:text-on-surface-variant/70 transition-all duration-300" id="email" name="email" placeholder="Seu endereço de e-mail" required="" type="email"/>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-semibold text-lg py-4 px-6 rounded-3xl mt-2 hover:opacity-95 active:scale-[0.98] transition-all shadow-sm flex items-center justify-center gap-2" type="submit">
+<span>Enviar Instruções</span>
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</button>
+</form>
+<!-- Tertiary Action (Back to Login) -->
+<div class="mt-8 w-full text-center">
+<a class="inline-flex items-center gap-2 text-primary font-body font-medium text-sm hover:bg-primary-fixed/30 px-4 py-2 rounded-full transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                    Voltar para o Login
+                </a>
+</div>
+</div>
+</main>
+</body></html>

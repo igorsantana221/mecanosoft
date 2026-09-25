@@ -1,0 +1,83 @@
+# =========================
+# .NET
+# =========================
+
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Logs
+*.log
+
+# =========================
+# Visual Studio Code
+# =========================
+
+.vscode/
+
+# =========================
+# Angular / Node
+# =========================
+
+node_modules/
+dist/
+.angular/
+.cache/
+.npm/
+
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# ASP.NET local settings
+appsettings.Development.json
+appsettings.Local.json
+
+# =========================
+# OS
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Certificates / Keys
+# =========================
+
+*.pfx
+*.p12
+*.key
+*.pem
+
+# =========================
+# VS
+# =========================
+
+.vs/
+**/.vs/
+
+bin/
+**/bin/
+
+obj/
+**/obj/
+
+node_modules/
+**/node_modules/
+
+dist/
+**/dist/

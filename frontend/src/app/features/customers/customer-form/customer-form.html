@@ -1,0 +1,524 @@
+<div class="max-w-5xl mx-auto px-6 py-12 lg:px-12 bg-surface min-h-full">
+
+    <!-- Page Header -->
+    <header class="mb-8 pl-2 border-l-4 border-primary">
+        <h1 class="text-4xl lg:text-5xl font-extrabold text-primary tracking-tight font-headline mb-3">
+            @if (isEditMode()) { Editar Cliente } @else { Cadastrar Novo Cliente }
+        </h1>
+        <p class="text-lg text-on-surface-variant max-w-2xl font-body">
+            @if (isEditMode()) {
+                Atualize os dados cadastrais do cliente e gerencie os veículos vinculados a ele.
+            } @else {
+                Adicione um novo cliente e opcionalmente cadastre seu primeiro veículo no mesmo formulário.
+            }
+        </p>
+    </header>
+
+    <!-- Navigation Tabs (Only in Edit Mode) -->
+    <div *ngIf="isEditMode() && !isLoading()" class="flex border-b border-surface-container-high/60 mb-8 gap-4">
+        <button type="button"
+                (click)="activeTab.set('details')"
+                [ngClass]="activeTab() === 'details' ? 'border-primary text-primary font-bold' : 'border-transparent text-on-surface-variant font-medium hover:text-on-surface'"
+                class="pb-3 px-2 border-b-2 text-base transition-all flex items-center gap-2 font-headline">
+            <span class="material-symbols-outlined text-lg">person</span>
+            Dados do Cliente
+        </button>
+
+        <button type="button"
+                (click)="activeTab.set('vehicles')"
+                [ngClass]="activeTab() === 'vehicles' ? 'border-primary text-primary font-bold' : 'border-transparent text-on-surface-variant font-medium hover:text-on-surface'"
+                class="pb-3 px-2 border-b-2 text-base transition-all flex items-center gap-2 font-headline">
+            <span class="material-symbols-outlined text-lg">directions_car</span>
+            Veículos
+            <span class="px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary font-bold">
+                {{ vehicles().length }}
+            </span>
+        </button>
+    </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+        <div class="flex flex-col items-center justify-center py-24 gap-4">
+            <div class="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+            <p class="text-sm text-on-surface-variant font-medium">Carregando dados do cliente...</p>
+        </div>
+    }
+
+    <!-- Error Banner -->
+    @if (submitError()) {
+        <div class="mb-6 bg-error-container text-on-error-container rounded-xl p-4 flex items-center gap-3 font-body text-sm">
+            <span class="material-symbols-outlined">error</span>
+            <span>{{ submitError() }}</span>
+        </div>
+    }
+
+    <!-- TAB 1: DADOS DO CLIENTE & FORMS -->
+    @if (!isLoading() && (activeTab() === 'details' || !isEditMode())) {
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="space-y-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Left Column: Type & Status (1/3 width) -->
+            <div class="lg:col-span-1 space-y-6">
+
+                <!-- Status Card -->
+                <div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-semibold text-on-surface mb-1 font-headline">Status do Cliente</h3>
+                            <p class="text-xs text-on-surface-variant font-body">Controle de ativação na plataforma</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" formControlName="isActive" class="sr-only peer">
+                            <div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Type Card -->
+                <div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10">
+                    <h3 class="font-semibold text-on-surface mb-4 font-headline">Tipo de Cliente</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button type="button"
+                                (click)="customerForm.patchValue({type: 'Individual'})"
+                                [ngClass]="customerForm.get('type')?.value === 'Individual' ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-on-surface-variant'"
+                                class="py-3 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5">
+                            <span class="material-symbols-outlined text-sm">person</span>
+                            Individual
+                        </button>
+                        <button type="button"
+                                (click)="customerForm.patchValue({type: 'Corporativo'})"
+                                [ngClass]="customerForm.get('type')?.value === 'Corporativo' ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-on-surface-variant'"
+                                class="py-3 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5">
+                            <span class="material-symbols-outlined text-sm">business</span>
+                            Corporativo
+                        </button>
+                    </div>
+                    <p class="text-[11px] text-on-surface-variant mt-3 leading-relaxed">
+                        @if (customerForm.get('type')?.value === 'Individual') {
+                            Pessoa Física — utilize CPF como documento.
+                        } @else {
+                            Pessoa Jurídica — utilize CNPJ como documento.
+                        }
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Column: Details (2/3 width) -->
+            <div class="lg:col-span-2 space-y-6">
+
+                <!-- Main Info Card -->
+                <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm border border-outline-variant/10">
+                    <h2 class="text-xl font-bold text-primary font-headline mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">person</span>
+                        Informações Básicas
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <!-- Nome -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-on-surface-variant px-1 font-label">
+                                Nome Completo <span class="text-error">*</span>
+                            </label>
+                            <input type="text" formControlName="name"
+                                class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                [class.ring-2]="isInvalid('name')"
+                                [class.ring-error]="isInvalid('name')"
+                                placeholder="ex: Bruno Rodrigues">
+                            @if (isInvalid('name')) {
+                                <p class="text-xs text-error px-1">Nome é obrigatório.</p>
+                            }
+                        </div>
+
+                        <!-- Documento -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-on-surface-variant px-1 font-label">
+                                Documento (CPF/CNPJ) <span class="text-error">*</span>
+                            </label>
+                            <input type="text" formControlName="document"
+                                class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                [class.ring-2]="isInvalid('document')"
+                                [class.ring-error]="isInvalid('document')"
+                                placeholder="000.000.000-00">
+                            @if (isInvalid('document')) {
+                                <p class="text-xs text-error px-1">Documento é obrigatório.</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Email -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-on-surface-variant px-1 font-label">
+                                E-mail de Contato <span class="text-error">*</span>
+                            </label>
+                            <input type="email" formControlName="email"
+                                class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                [class.ring-2]="isInvalid('email')"
+                                [class.ring-error]="isInvalid('email')"
+                                placeholder="email@exemplo.com">
+                            @if (isInvalid('email')) {
+                                <p class="text-xs text-error px-1">E-mail inválido.</p>
+                            }
+                        </div>
+
+                        <!-- Telefone -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-on-surface-variant px-1 font-label">
+                                Telefone / WhatsApp <span class="text-error">*</span>
+                            </label>
+                            <input type="text" formControlName="phone"
+                                class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                [class.ring-2]="isInvalid('phone')"
+                                [class.ring-error]="isInvalid('phone')"
+                                placeholder="(11) 00000-0000">
+                            @if (isInvalid('phone')) {
+                                <p class="text-xs text-error px-1">Telefone é obrigatório.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Info Card -->
+                <div formGroupName="address" class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm border border-outline-variant/10">
+                    <h2 class="text-xl font-bold text-primary font-headline mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">location_on</span>
+                        Localização
+                    </h2>
+
+                    <div class="space-y-6">
+
+                        <!-- CEP com busca automática -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-on-surface-variant px-1 font-label">
+                                    CEP <span class="text-error">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input type="text" formControlName="zipCode"
+                                        (blur)="onCepBlur()"
+                                        class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 pr-10 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                        [class.ring-2]="isInvalid('address.zipCode')"
+                                        [class.ring-error]="isInvalid('address.zipCode')"
+                                        placeholder="00000-000">
+                                    @if (isSearchingCep()) {
+                                        <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                                            <div class="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+                                        </div>
+                                    }
+                                </div>
+                                @if (cepError()) {
+                                    <p class="text-xs text-error px-1">{{ cepError() }}</p>
+                                }
+                                @if (isInvalid('address.zipCode')) {
+                                    <p class="text-xs text-error px-1">CEP é obrigatório.</p>
+                                }
+                            </div>
+
+                            <!-- Rua -->
+                            <div class="md:col-span-2 space-y-2">
+                                <label class="text-sm font-medium text-on-surface-variant px-1 font-label">
+                                    Logradouro <span class="text-error">*</span>
+                                </label>
+                                <input type="text" formControlName="street"
+                                    class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                    [class.ring-2]="isInvalid('address.street')"
+                                    [class.ring-error]="isInvalid('address.street')"
+                                    placeholder="Rua, Avenida, Travessa...">
+                            </div>
+                        </div>
+
+                        <!-- Número, Complemento, Bairro -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-on-surface-variant px-1 font-label">Número</label>
+                                <input type="text" formControlName="number"
+                                    class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                    placeholder="Ex: 142">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-on-surface-variant px-1 font-label">Complemento</label>
+                                <input type="text" formControlName="complement"
+                                    class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                    placeholder="Apto, Sala, Bloco...">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-on-surface-variant px-1 font-label">Bairro</label>
+                                <input type="text" formControlName="neighborhood"
+                                    class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                    placeholder="Bairro">
+                            </div>
+                        </div>
+
+                        <!-- Cidade e Estado -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="md:col-span-2 space-y-2">
+                                <label class="text-sm font-medium text-on-surface-variant px-1 font-label">
+                                    Cidade <span class="text-error">*</span>
+                                </label>
+                                <input type="text" formControlName="city"
+                                    class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                                    [class.ring-2]="isInvalid('address.city')"
+                                    [class.ring-error]="isInvalid('address.city')"
+                                    placeholder="Cidade">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-on-surface-variant px-1 font-label">
+                                    Estado <span class="text-error">*</span>
+                                </label>
+                                <div class="relative">
+                                    <select formControlName="state"
+                                        class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none appearance-none">
+                                        <option value="">UF</option>
+                                        @for (uf of ['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']; track uf) {
+                                            <option [value]="uf">{{ uf }}</option>
+                                        }
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-on-surface-variant">
+                                        <span class="material-symbols-outlined text-sm">expand_more</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO OPCIONAL: VEÍCULO DO CLIENTE (Apenas na Criação) -->
+                <div *ngIf="!isEditMode()" class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm border border-outline-variant/10 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center font-bold">
+                                <span class="material-symbols-outlined">directions_car</span>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-bold text-primary font-headline">Veículo do Cliente</h2>
+                                <p class="text-xs text-on-surface-variant">Cadastrar veículo junto com o cliente (Opcional)</p>
+                            </div>
+                        </div>
+
+                        <!-- Toggle Button -->
+                        <button type="button"
+                                (click)="toggleIncludeVehicle()"
+                                [ngClass]="includeVehicle() ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-on-surface-variant'"
+                                class="px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">{{ includeVehicle() ? 'check_circle' : 'add_circle' }}</span>
+                            {{ includeVehicle() ? 'Incluir Veículo Ativado' : '+ Adicionar Veículo Agora' }}
+                        </button>
+                    </div>
+
+                    <!-- Formulário Colapsável do Veículo Opcional -->
+                    <div *ngIf="includeVehicle()" formGroupName="vehicle" class="space-y-6 pt-4 border-t border-surface-container-low animate-in fade-in duration-300">
+
+                        <!-- Plate Lookup Status Notification Banner -->
+                        <div *ngIf="plateLookupStatus()" class="p-3 rounded-xl text-xs font-medium flex items-start gap-2.5 transition-all"
+                             [ngClass]="{
+                               'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20': plateLookupStatus()?.type === 'success',
+                               'bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20': plateLookupStatus()?.type === 'warning',
+                               'bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-500/20': plateLookupStatus()?.type === 'error' || plateLookupStatus()?.type === 'alreadyExists'
+                             }">
+                            <span class="material-symbols-outlined text-base shrink-0">
+                                {{ plateLookupStatus()?.type === 'success' ? 'check_circle' : (plateLookupStatus()?.type === 'warning' ? 'warning' : 'error') }}
+                            </span>
+                            <span class="flex-1">{{ plateLookupStatus()?.message }}</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-on-surface-variant font-label">Placa <span class="text-error">*</span></label>
+                                <div class="flex gap-2">
+                                    <input formControlName="licensePlate" (input)="onPlateInput($event)" (keyup.enter)="consultPlate()" class="w-full bg-surface-container-low border-none rounded-xl px-3 py-2.5 text-on-surface focus:ring-2 focus:ring-primary/20 font-headline font-black tracking-widest uppercase text-sm" placeholder="ABC1D23"/>
+                                    <button type="button" (click)="consultPlate()" [disabled]="isConsultingPlate()" class="shrink-0 px-3 py-2.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl font-bold text-xs flex items-center gap-1.5 transition-colors disabled:opacity-50" title="Consultar placa veicular">
+                                        <span *ngIf="isConsultingPlate()" class="material-symbols-outlined text-sm animate-spin">progress_activity</span>
+                                        <span *ngIf="!isConsultingPlate()" class="material-symbols-outlined text-sm">search</span>
+                                        <span class="hidden sm:inline">Consultar</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-on-surface-variant font-label">Marca <span class="text-error">*</span></label>
+                                <input formControlName="brand" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-2.5 text-on-surface focus:ring-2 focus:ring-primary/20 font-body text-sm font-bold" placeholder="Ex: Honda"/>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-on-surface-variant font-label">Modelo <span class="text-error">*</span></label>
+                                <input formControlName="model" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-2.5 text-on-surface focus:ring-2 focus:ring-primary/20 font-body text-sm font-bold" placeholder="Ex: Civic"/>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-on-surface-variant font-label">Ano</label>
+                                <input formControlName="year" type="number" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-2.5 text-on-surface focus:ring-2 focus:ring-primary/20 font-body text-sm font-bold"/>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-on-surface-variant font-label">Cor</label>
+                                <input formControlName="color" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-2.5 text-on-surface focus:ring-2 focus:ring-primary/20 font-body text-sm font-bold" placeholder="Ex: Prata"/>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-on-surface-variant font-label">Quilometragem (Km)</label>
+                                <input formControlName="mileage" type="number" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-2.5 text-on-surface focus:ring-2 focus:ring-primary/20 font-body text-sm font-bold"/>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-on-surface-variant font-label">Chassi (Opcional)</label>
+                                <input formControlName="chassis" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-2.5 text-on-surface focus:ring-2 focus:ring-primary/20 font-mono text-xs uppercase"/>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-on-surface-variant font-label">Renavam (Opcional)</label>
+                                <input formControlName="renavam" class="w-full bg-surface-container-low border-none rounded-xl px-4 py-2.5 text-on-surface focus:ring-2 focus:ring-primary/20 font-mono text-xs"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="flex items-center justify-between gap-4 mt-8 pt-8 bg-surface-container-low rounded-2xl p-6">
+            <button type="button" (click)="cancel()"
+                class="px-6 py-3 rounded-xl font-bold text-sm text-on-surface-variant hover:bg-surface-variant transition-all">
+                Cancelar
+            </button>
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-on-surface-variant hidden md:block">
+                    Campos com <span class="text-error font-bold">*</span> são obrigatórios
+                </span>
+                <button type="submit" [disabled]="isSubmitting()"
+                    class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold text-sm shadow-lg flex items-center gap-2 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                    @if (isSubmitting()) {
+                        <span class="material-symbols-outlined text-sm animate-spin">progress_activity</span>
+                        Salvando...
+                    } @else {
+                        <span class="material-symbols-outlined text-sm">save</span>
+                        @if (isEditMode()) { Atualizar Cliente } @else { Salvar Cliente }
+                    }
+                </button>
+            </div>
+        </div>
+    </form>
+    }
+
+    <!-- TAB 2: VEÍCULOS VINCULADOS AO CLIENTE (Modo Edição) -->
+    @if (isEditMode() && !isLoading() && activeTab() === 'vehicles') {
+    <div class="space-y-6 animate-in fade-in duration-300">
+        <!-- Actions Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-container-lowest p-6 rounded-3xl shadow-sm border border-outline-variant/10">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center font-bold">
+                    <span class="material-symbols-outlined text-2xl">directions_car</span>
+                </div>
+                <div>
+                    <h2 class="text-xl font-headline font-bold text-primary">Veículos do Cliente ({{ vehicles().length }})</h2>
+                    <p class="text-xs text-on-surface-variant font-body">Lista de automóveis cadastrados e vinculados a este cliente.</p>
+                </div>
+            </div>
+
+            <button type="button" (click)="openAddVehicleModal()" class="px-5 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-headline font-bold text-xs shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 shrink-0">
+                <span class="material-symbols-outlined text-base">add_circle</span>
+                + Adicionar Veículo
+            </button>
+        </div>
+
+        <!-- Vehicles List Table -->
+        <div class="bg-surface-container-lowest rounded-3xl shadow-sm border border-outline-variant/10 overflow-hidden">
+            <div *ngIf="isLoadingVehicles()" class="py-16 text-center">
+                <div class="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-3"></div>
+                <p class="text-xs font-medium text-on-surface-variant">Carregando veículos do cliente...</p>
+            </div>
+
+            <div *ngIf="!isLoadingVehicles() && vehicles().length === 0" class="py-16 text-center px-6">
+                <span class="material-symbols-outlined text-4xl text-on-surface-variant/40 mb-2">no_crash</span>
+                <h3 class="text-base font-headline font-bold text-primary mb-1">Nenhum veículo vinculado</h3>
+                <p class="text-xs text-on-surface-variant max-w-sm mx-auto mb-4">Este cliente ainda não possui veículos vinculados à sua conta.</p>
+                <button type="button" (click)="openAddVehicleModal()" class="px-4 py-2 bg-primary text-on-primary rounded-xl text-xs font-bold shadow hover:opacity-90 transition-all inline-flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm">add_circle</span>
+                    Adicionar Primeiro Veículo
+                </button>
+            </div>
+
+            <div *ngIf="!isLoadingVehicles() && vehicles().length > 0" class="overflow-x-auto">
+                <table class="w-full text-left border-collapse font-body">
+                    <thead>
+                        <tr class="bg-surface-container-low/50 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider border-b border-surface-container-high/50">
+                            <th class="py-4 px-6">Placa</th>
+                            <th class="py-4 px-6">Marca / Modelo</th>
+                            <th class="py-4 px-6">Ano / Cor</th>
+                            <th class="py-4 px-6">Quilometragem</th>
+                            <th class="py-4 px-6">Data de Cadastro</th>
+                            <th class="py-4 px-6 text-right">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-container-low text-sm">
+                        @for (v of vehicles(); track v.id) {
+                            <tr class="hover:bg-surface-container-low/30 transition-colors">
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-3 py-1 bg-surface-container-high text-on-surface rounded-lg font-headline font-black tracking-widest text-xs border border-outline-variant/20 shadow-sm">
+                                        {{ v.licensePlate }}
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="font-bold text-on-surface font-headline">{{ v.brand }} {{ v.model }}</div>
+                                    <div *ngIf="v.chassis" class="text-[10px] text-on-surface-variant font-mono">Chassi: {{ v.chassis }}</div>
+                                </td>
+                                <td class="py-4 px-6 text-on-surface-variant font-medium">
+                                    {{ v.year }} {{ v.color ? '• ' + v.color : '' }}
+                                </td>
+                                <td class="py-4 px-6 font-semibold text-on-surface">
+                                    {{ v.mileage | number }} km
+                                </td>
+                                <td class="py-4 px-6 text-xs text-on-surface-variant">
+                                    {{ v.createdAt | date:'dd/MM/yyyy' }}
+                                </td>
+                                <td class="py-4 px-6 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <button type="button" (click)="openEditVehicleModal(v)" title="Editar Veículo" class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-xl transition-all">
+                                            <span class="material-symbols-outlined text-lg">edit</span>
+                                        </button>
+                                        <button type="button" (click)="confirmDeleteVehicle(v)" title="Excluir Veículo" class="p-2 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-xl transition-all">
+                                            <span class="material-symbols-outlined text-lg">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- Vehicle Form Modal (Preset to current Customer) -->
+    <app-vehicle-form-modal
+        [isOpen]="isVehicleModalOpen()"
+        [vehicle]="selectedVehicle()"
+        [preselectedCustomerId]="editId()"
+        (closed)="isVehicleModalOpen.set(false)"
+        (saved)="onVehicleSaved()">
+    </app-vehicle-form-modal>
+
+    <!-- Delete Confirmation Modal for Vehicle -->
+    <div *ngIf="vehicleToDelete()" class="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+        <div (click)="cancelDeleteVehicle()" class="fixed inset-0 bg-primary-container/40 backdrop-blur-sm"></div>
+        <div class="relative bg-surface-container-lowest p-6 rounded-3xl shadow-2xl max-w-md w-full z-10 border border-outline-variant/10 text-center space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-error/10 text-error flex items-center justify-center mx-auto">
+                <span class="material-symbols-outlined text-2xl">warning</span>
+            </div>
+            <div>
+                <h3 class="text-lg font-headline font-bold text-primary">Excluir Veículo</h3>
+                <p class="text-xs text-on-surface-variant mt-1">
+                    Deseja remover o veículo <strong class="text-on-surface">{{ vehicleToDelete()?.licensePlate }}</strong> ({{ vehicleToDelete()?.brand }} {{ vehicleToDelete()?.model }}) deste cliente?
+                </p>
+            </div>
+            <div class="flex items-center justify-end gap-3 pt-2">
+                <button type="button" (click)="cancelDeleteVehicle()" class="w-full py-2.5 rounded-xl font-bold text-xs text-on-surface-variant bg-surface-container-low hover:bg-surface-container-high transition-colors">
+                    Cancelar
+                </button>
+                <button type="button" (click)="executeDeleteVehicle()" class="w-full py-2.5 rounded-xl font-bold text-xs text-on-error bg-error hover:opacity-90 transition-opacity">
+                    Sim, Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

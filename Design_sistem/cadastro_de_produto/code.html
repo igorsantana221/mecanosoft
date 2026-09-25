@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ArchitectCurator - Novo Produto</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#572500",
+                        "surface-container-highest": "#e0e3e6",
+                        "background": "#f7f9fc",
+                        "secondary-fixed": "#d3e4ff",
+                        "on-primary-container": "#8abcff",
+                        "on-surface-variant": "#424750",
+                        "primary": "#003461",
+                        "tertiary-fixed": "#ffdbc8",
+                        "on-secondary-fixed": "#081c33",
+                        "primary-fixed": "#d3e4ff",
+                        "secondary-container": "#cee1ff",
+                        "primary-fixed-dim": "#a3c9ff",
+                        "on-secondary-container": "#52647d",
+                        "on-background": "#191c1e",
+                        "on-tertiary-container": "#ffa46a",
+                        "surface": "#f7f9fc",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#793701",
+                        "surface-container": "#eceef1",
+                        "on-primary-fixed-variant": "#004882",
+                        "outline": "#727781",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#001c38",
+                        "surface-tint": "#27609d",
+                        "on-tertiary-fixed-variant": "#753400",
+                        "outline-variant": "#c2c6d1",
+                        "on-tertiary-fixed": "#321300",
+                        "surface-container-high": "#e6e8eb",
+                        "surface-container-low": "#f2f4f7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d8dadd",
+                        "primary-container": "#004b87",
+                        "tertiary-fixed-dim": "#ffb68b",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eff1f4",
+                        "secondary": "#4e5f79",
+                        "on-secondary-fixed-variant": "#364860",
+                        "inverse-surface": "#2d3133",
+                        "surface-variant": "#e0e3e6",
+                        "inverse-primary": "#a3c9ff",
+                        "secondary-fixed-dim": "#b5c8e5",
+                        "surface-bright": "#f7f9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+            font-family: theme('fontFamily.body');
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5, h6, .headline {
+            font-family: theme('fontFamily.headline');
+        }
+        /* Custom form styles based on design system */
+        .ds-input {
+            background-color: theme('colors.surface-container-low');
+            border: none;
+            border-radius: theme('borderRadius.md');
+            color: theme('colors.on-surface');
+            padding: 0.75rem 1rem;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        .ds-input:focus {
+            background-color: theme('colors.surface-container-lowest');
+            box-shadow: 0 0 0 2px theme('colors.surface-tint');
+            outline: none;
+        }
+        .ds-input::placeholder {
+            color: theme('colors.outline');
+        }
+        .ds-label {
+            font-family: theme('fontFamily.label');
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: theme('colors.on-surface-variant');
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .ds-card {
+            background-color: theme('colors.surface-container-lowest');
+            border-radius: theme('borderRadius.xl');
+            padding: 2rem;
+            /* No lines rule - rely on background contrast or ambient shadow */
+        }
+        .ds-btn-primary {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.primary-container'));
+            color: theme('colors.on-primary');
+            border-radius: theme('borderRadius.xl');
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .ds-btn-primary:hover {
+            opacity: 0.9;
+        }
+        .ds-btn-secondary {
+            background-color: theme('colors.surface-container-highest');
+            color: theme('colors.on-surface');
+            border-radius: theme('borderRadius.xl');
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+        .ds-btn-secondary:hover {
+            background-color: theme('colors.surface-variant');
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col p-4 gap-2 no-border bg-slate-100 dark:bg-slate-900 bg-surface-container-low hidden md:flex z-40">
+<!-- Header -->
+<div class="flex items-center gap-3 px-4 py-6 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-xl shadow-sm">
+                C
+            </div>
+<div>
+<h2 class="text-lg font-black text-blue-900 dark:text-blue-100 headline tracking-tight">Curator Admin</h2>
+<p class="text-xs text-on-surface-variant font-medium">Enterprise Edition</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-2 mb-6">
+<button class="w-full ds-btn-primary py-3"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">add</span> Novo Orçamento</button>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 space-y-1 px-2 font-['Inter'] text-sm font-medium">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 active:scale-98" href="#"><span class="material-symbols-outlined">dashboard</span> Painel</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 active:scale-98" href="#"><span class="material-symbols-outlined">add_notes</span> Criar Orçamento</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 active:scale-98" href="#"><span class="material-symbols-outlined">list_alt</span> Lista de Orçamentos</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 active:scale-98" href="#"><span class="material-symbols-outlined">group</span> Clientes</a>
+<!-- Active State: Products -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-blue-900 dark:text-blue-300 font-bold bg-white dark:bg-slate-800 rounded-lg active:scale-98 shadow-sm" href="#"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span> Produtos</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 active:scale-98" href="#"><span class="material-symbols-outlined">card_membership</span> Assinatura</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 active:scale-98" href="#"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
+</nav>
+<!-- Footer Links -->
+<div class="mt-auto px-2 space-y-1 pb-4">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 active:scale-98" href="#"><span class="material-symbols-outlined text-sm">help</span> Central de Ajuda</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 active:scale-98" href="#"><span class="material-symbols-outlined text-sm">logout</span> Sair</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 h-full overflow-y-auto bg-surface relative">
+<!-- Mobile Top Bar (Fallback since we hide SideNav on mobile) -->
+<div class="md:hidden flex items-center justify-between p-4 bg-surface-container-lowest shadow-sm z-30 sticky top-0">
+<div class="text-lg font-black text-primary headline">Curator Admin</div>
+<button class="text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="max-w-5xl mx-auto px-6 py-12 lg:px-12">
+<!-- Page Header -->
+<header class="mb-10 pl-2 border-l-4 border-transparent">
+<h1 class="text-4xl lg:text-5xl font-extrabold text-primary tracking-tight headline mb-3">Cadastrar Novo Produto</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl">Adicione um novo material, mobiliário ou serviço arquitetônico ao catálogo de curadoria.</p>
+</header>
+<!-- Form Container -->
+<form action="#" class="space-y-8" method="POST">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Image Upload & Status (1/3 width) -->
+<div class="lg:col-span-1 space-y-6">
+<!-- Image Upload Card -->
+<div class="ds-card flex flex-col items-center justify-center p-8 border-2 border-dashed border-outline-variant bg-surface-container-low hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-surface-container-lowest flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+<span class="material-symbols-outlined text-3xl text-primary">add_photo_alternate</span>
+</div>
+<h3 class="font-semibold text-on-surface mb-1 text-center">Carregar Imagem Principal</h3>
+<p class="text-xs text-on-surface-variant text-center max-w-[200px]">PNG, JPG ou WEBP até 5MB. Alta resolução preferencial.</p>
+<input accept="image/*" class="hidden" type="file"/>
+</div>
+<!-- Status Toggle Card -->
+<div class="ds-card flex items-center justify-between p-6">
+<div>
+<h3 class="font-semibold text-on-surface mb-1">Status no Catálogo</h3>
+<p class="text-xs text-on-surface-variant">Visibilidade em orçamentos ativos</p>
+</div>
+<!-- Custom Toggle -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-3 text-sm font-medium text-on-surface">Ativo</span>
+</label>
+</div>
+</div>
+<!-- Right Column: Product Details (2/3 width) -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Details Card -->
+<div class="ds-card">
+<h2 class="text-xl font-bold text-primary headline mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary-container">info</span> Informações Principais</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div>
+<label class="ds-label" for="product_name">Nome do Produto</label>
+<input class="ds-input" id="product_name" placeholder="ex: Chapa de Mármore Carrara" type="text"/>
+</div>
+<div>
+<label class="ds-label" for="sku">SKU / Código do Item</label>
+<input class="ds-input" id="sku" placeholder="ex: MAR-CAR-001" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div>
+<label class="ds-label" for="category">Categoria</label>
+<div class="relative">
+<select class="ds-input appearance-none" id="category"><option disabled="" selected="" value="">Selecione uma categoria...</option><option value="stone">Pedras e Superfícies</option><option value="wood">Madeira e Marcenaria</option><option value="hardware">Ferragens e Acessórios</option><option value="lighting">Iluminação</option><option value="furniture">Mobiliário</option><option value="services">Serviços de Consultoria</option></select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-on-surface-variant">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<div>
+<label class="ds-label" for="unit_price">Preço Unitário (R$)</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="text-on-surface-variant">R$</span>
+</div>
+<input class="ds-input pl-8" id="unit_price" placeholder="0.00" step="0.01" type="number"/>
+</div>
+</div>
+</div>
+<div>
+<label class="ds-label" for="description">Descrição</label>
+<textarea class="ds-input resize-y" id="description" placeholder="Descrição detalhada do material, dimensões, prazos de entrega, etc." rows="4"></textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="flex items-center justify-end gap-4 mt-8 pt-8 border-t-0 bg-surface-container-low rounded-xl p-6">
+<button class="ds-btn-secondary text-sm" type="button">Cancelar</button>
+<button class="ds-btn-primary shadow-[0_8px_16px_-6px_rgba(0,52,97,0.3)]" type="submit"><span class="material-symbols-outlined text-sm">save</span> Salvar Produto</button>
+</div>
+</form>
+</div>
+</main>
+</body></html>

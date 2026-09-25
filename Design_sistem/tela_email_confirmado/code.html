@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>E-mail Verificado - Architectural Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-background": "#191c1e",
+                "surface-container-highest": "#e0e3e6",
+                "tertiary": "#572500",
+                "on-surface-variant": "#424750",
+                "on-secondary-fixed-variant": "#364860",
+                "error-container": "#ffdad6",
+                "primary-fixed": "#d3e4ff",
+                "on-surface": "#191c1e",
+                "surface-variant": "#e0e3e6",
+                "tertiary-container": "#793701",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary": "#ffffff",
+                "surface-dim": "#d8dadd",
+                "secondary-fixed": "#d3e4ff",
+                "surface-bright": "#f7f9fc",
+                "surface-container-low": "#f2f4f7",
+                "on-secondary-container": "#52647d",
+                "primary-fixed-dim": "#a3c9ff",
+                "surface": "#f7f9fc",
+                "primary-container": "#004b87",
+                "surface-container": "#eceef1",
+                "background": "#f7f9fc",
+                "surface-tint": "#27609d",
+                "secondary-container": "#cee1ff",
+                "on-tertiary-fixed-variant": "#753400",
+                "tertiary-fixed-dim": "#ffb68b",
+                "inverse-surface": "#2d3133",
+                "secondary-fixed-dim": "#b5c8e5",
+                "outline-variant": "#c2c6d1",
+                "inverse-primary": "#a3c9ff",
+                "on-secondary-fixed": "#081c33",
+                "on-tertiary-fixed": "#321300",
+                "on-primary-fixed": "#001c38",
+                "error": "#ba1a1a",
+                "on-primary": "#ffffff",
+                "primary": "#003461",
+                "on-primary-container": "#8abcff",
+                "on-error": "#ffffff",
+                "on-tertiary-container": "#ffa46a",
+                "outline": "#727781",
+                "secondary": "#4e5f79",
+                "on-error-container": "#93000a",
+                "on-primary-fixed-variant": "#004882",
+                "on-tertiary": "#ffffff",
+                "inverse-on-surface": "#eff1f4",
+                "surface-container-high": "#e6e8eb",
+                "tertiary-fixed": "#ffdbc8"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Manrope"],
+                "display": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-primary-gradient {
+            background: linear-gradient(135deg, #003461 0%, #004b87 100%);
+        }
+        .ambient-shadow {
+            box-shadow: 0 40px 60px -10px rgba(25, 28, 30, 0.06);
+        }
+        .glass-header {
+            background: rgba(247, 249, 252, 0.8);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface flex flex-col min-h-screen">
+<!-- Header Navigation Shell suppressed for Transactional Success Screen -->
+<header class="fixed top-0 w-full z-50 glass-header">
+<div class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+<div class="text-xl font-extrabold tracking-tighter text-primary">Architectural Curator</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Ajuda</a>
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Suporte</a>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-4 py-24 relative overflow-hidden">
+<!-- Abstract Background Decorative Elements -->
+<div class="absolute top-0 left-0 w-full h-full -z-10 opacity-30 pointer-events-none">
+<div class="absolute top-[-10%] right-[-5%] w-[40vw] h-[40vw] rounded-full bg-primary-fixed-dim blur-[120px]"></div>
+<div class="absolute bottom-[-5%] left-[-5%] w-[30vw] h-[30vw] rounded-full bg-secondary-fixed blur-[100px]"></div>
+</div>
+<!-- Success Content Canvas -->
+<div class="w-full max-w-lg">
+<div class="bg-surface-container-lowest rounded-[2rem] p-8 md:p-12 ambient-shadow text-center relative">
+<!-- Illustration/Icon Section -->
+<div class="mb-10 flex justify-center">
+<div class="relative w-24 h-24 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary-container/10 rounded-full scale-150 blur-xl"></div>
+<div class="w-20 h-20 rounded-full bg-primary-gradient flex items-center justify-center text-on-primary shadow-lg ring-8 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Messaging -->
+<div class="space-y-4 mb-10">
+<h1 class="font-display font-extrabold text-4xl md:text-5xl text-primary tracking-tight">
+                        E-mail Verificado!
+                    </h1>
+<p class="text-on-surface-variant leading-relaxed text-lg max-w-sm mx-auto">
+                        Seu endereço de e-mail foi confirmado com sucesso. Agora você já pode acessar todos os recursos da plataforma.
+                    </p>
+</div>
+<!-- Editorial Layout Detail: Decorative Tonal Shift Section -->
+<div class="bg-surface-container-low rounded-2xl p-6 mb-10 flex items-center gap-4 text-left">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<div>
+<p class="font-display font-bold text-primary text-sm uppercase tracking-wider">Acesso Liberado</p>
+<p class="text-sm text-on-surface-variant">Sua conta está totalmente ativa e segura.</p>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="space-y-4">
+<a class="bg-primary-gradient text-on-primary font-bold text-lg px-10 py-4 rounded-xl inline-flex items-center justify-center w-full hover:shadow-xl transition-all active:scale-[0.98]" href="/login">
+                        Ir para o Login
+                        <span class="material-symbols-outlined ml-2 text-xl">arrow_forward</span>
+</a>
+<div class="pt-4">
+<p class="text-sm text-on-surface-variant">
+                            Algum problema? <a class="text-primary font-semibold hover:underline" href="#">Fale com o suporte</a>
+</p>
+</div>
+</div>
+</div>
+<!-- Footer-lite for transaction screens -->
+<div class="mt-12 text-center">
+<p class="text-on-surface-variant font-medium text-xs tracking-widest uppercase opacity-60">
+                    Architectural Curator Digital Ecosystem
+                </p>
+</div>
+</div>
+</main>
+<!-- Footer Component from JSON Integration -->
+<footer class="w-full py-12 bg-surface dark:bg-[#191c1e]">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto">
+<div class="font-inter text-sm leading-relaxed text-on-secondary-container mb-4 md:mb-0">
+                © 2024 Architectural Curator. Todos os direitos reservados.
+            </div>
+<div class="flex gap-6">
+<a class="font-inter text-sm text-on-secondary-container hover:text-primary transition-all" href="#">Privacidade</a>
+<a class="font-inter text-sm text-on-secondary-container hover:text-primary transition-all" href="#">Termos</a>
+<a class="font-inter text-sm text-on-secondary-container hover:text-primary transition-all" href="#">Segurança</a>
+</div>
+</div>
+</footer>
+</body></html>

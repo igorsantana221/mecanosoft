@@ -1,0 +1,98 @@
+<div class="flex h-screen overflow-hidden bg-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- Sidebar -->
+    <aside [ngClass]="{
+        'translate-x-0 opacity-100 pointer-events-auto': sidebarOpen(),
+        '-translate-x-full opacity-0 pointer-events-none': !sidebarOpen()
+    }" class="fixed left-0 top-0 h-screen w-64 bg-surface-container-low border-r border-surface-container-high/50 flex flex-col p-4 transition-all duration-500 ease-in-out z-50 md:static md:translate-x-0 md:opacity-100 md:pointer-events-auto shadow-ambient md:shadow-none">
+        <!-- Sidebar Header -->
+        <div class="flex items-center justify-between px-3 py-6 mb-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-on-primary font-headline font-bold shadow-lg">
+                    MO
+                </div>
+                <div>
+                    <h2 class="text-lg font-black text-primary font-headline tracking-tighter leading-none">MonkOrc</h2>
+                    <p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest mt-1">Enterprise</p>
+                </div>
+            </div>
+            <!-- Close Button (Mobile Only) -->
+            <button (click)="toggleSidebar()" class="md:hidden p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 space-y-1">
+            <a routerLink="/dashboard" (click)="closeSidebarMobile()" routerLinkActive="bg-white text-primary shadow-sm" class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white/50 hover:text-primary transition-all duration-300 group">
+                <span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">dashboard</span>
+                <span class="text-sm font-headline font-bold">Painel</span>
+            </a>
+            <a routerLink="/quotes" (click)="closeSidebarMobile()" routerLinkActive="bg-white text-primary shadow-sm" class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white/50 hover:text-primary transition-all duration-300 group">
+                <span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">request_quote</span>
+                <span class="text-sm font-headline font-bold">Orçamentos</span>
+            </a>
+            <a routerLink="/customers" (click)="closeSidebarMobile()" routerLinkActive="bg-white text-primary shadow-sm" class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white/50 hover:text-primary transition-all duration-300 group">
+                <span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">group</span>
+                <span class="text-sm font-headline font-bold">Clientes</span>
+            </a>
+            <a routerLink="/vehicles" (click)="closeSidebarMobile()" routerLinkActive="bg-white text-primary shadow-sm" class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white/50 hover:text-primary transition-all duration-300 group">
+                <span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">directions_car</span>
+                <span class="text-sm font-headline font-bold">Veículos</span>
+            </a>
+            <a routerLink="/products" (click)="closeSidebarMobile()" routerLinkActive="bg-white text-primary shadow-sm" class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white/50 hover:text-primary transition-all duration-300 group">
+                <span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">inventory_2</span>
+                <span class="text-sm font-headline font-bold">Produtos</span>
+            </a>
+            <a routerLink="/profile" (click)="closeSidebarMobile()" routerLinkActive="bg-white text-primary shadow-sm" class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white/50 hover:text-primary transition-all duration-300 group">
+                <span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">person</span>
+                <span class="text-sm font-headline font-bold">Perfil</span>
+            </a>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="pt-4 mt-auto border-t border-surface-container-high/50">
+            <button (click)="logout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-error/10 hover:text-error transition-all duration-300 group">
+                <span class="material-symbols-outlined text-[20px] group-hover:rotate-12 transition-transform">logout</span>
+                <span class="text-sm font-headline font-bold">Sair</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        <!-- Topbar -->
+        <header class="h-20 bg-surface/80 backdrop-blur-md border-b border-surface-container-high/50 flex items-center justify-between px-6 md:px-10 z-40 shrink-0">
+            <div class="flex items-center gap-4">
+                <button (click)="toggleSidebar()" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors md:hidden">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <div class="hidden md:block">
+                    <p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-0.5">Bem-vindo de volta,</p>
+                    <h3 class="text-lg font-headline font-black text-primary tracking-tight">{{ user()?.name }}</h3>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <div class="flex flex-col items-end mr-2 hidden sm:flex">
+                    <p class="text-sm font-headline font-bold text-on-surface">{{ user()?.name }}</p>
+                    <p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">Admin</p>
+                </div>
+                <div routerLink="/profile" class="w-10 h-10 rounded-full bg-primary/10 border border-surface-container-high flex items-center justify-center overflow-hidden shadow-sm hover:ring-4 hover:ring-primary/5 transition-all cursor-pointer">
+                    @if (user()?.avatarUrl) {
+                        <img [src]="user()?.avatarUrl" alt="Profile" class="w-full h-full object-cover"/>
+                    } @else {
+                        <span class="text-primary text-xs font-black font-manrope uppercase select-none">{{ getInitials(user()?.name) }}</span>
+                    }
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <main class="flex-1 overflow-y-auto bg-surface custom-scrollbar">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div *ngIf="sidebarOpen()" (click)="toggleSidebar()" class="md:hidden fixed inset-0 bg-primary/20 backdrop-blur-sm z-40 animate-in fade-in duration-300"></div>
+</div>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Redefinir Senha | Mecanosoft</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-bright": "#f7f9fc",
+                "primary-fixed-dim": "#a3c9ff",
+                "on-secondary": "#ffffff",
+                "on-background": "#191c1e",
+                "on-primary-fixed": "#001c38",
+                "on-tertiary-fixed": "#321300",
+                "on-primary-fixed-variant": "#004882",
+                "secondary": "#4e5f79",
+                "tertiary-container": "#793701",
+                "secondary-container": "#cee1ff",
+                "secondary-fixed-dim": "#b5c8e5",
+                "on-surface": "#191c1e",
+                "inverse-surface": "#2d3133",
+                "inverse-on-surface": "#eff1f4",
+                "background": "#f7f9fc",
+                "on-secondary-container": "#52647d",
+                "surface-container-high": "#e6e8eb",
+                "tertiary-fixed-dim": "#ffb68b",
+                "on-secondary-fixed": "#081c33",
+                "outline": "#727781",
+                "surface-dim": "#d8dadd",
+                "primary": "#003461",
+                "tertiary-fixed": "#ffdbc8",
+                "on-surface-variant": "#424750",
+                "surface-container": "#eceef1",
+                "surface-variant": "#e0e3e6",
+                "surface-tint": "#27609d",
+                "error-container": "#ffdad6",
+                "secondary-fixed": "#d3e4ff",
+                "outline-variant": "#c2c6d1",
+                "on-secondary-fixed-variant": "#364860",
+                "on-error": "#ffffff",
+                "on-primary-container": "#8abcff",
+                "primary-container": "#004b87",
+                "surface-container-lowest": "#ffffff",
+                "primary-fixed": "#d3e4ff",
+                "on-error-container": "#93000a",
+                "surface-container-highest": "#e0e3e6",
+                "on-tertiary": "#ffffff",
+                "inverse-primary": "#a3c9ff",
+                "error": "#ba1a1a",
+                "tertiary": "#572500",
+                "surface": "#f7f9fc",
+                "on-primary": "#ffffff",
+                "surface-container-low": "#f2f4f7",
+                "on-tertiary-fixed-variant": "#753400",
+                "on-tertiary-container": "#ffa46a"
+            },
+            "fontFamily": {
+                "headline": ["Manrope"],
+                "display": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gradient-bg {
+            background: radial-gradient(circle at top left, #f7f9fc 0%, #cee1ff 100%);
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, #003461 0%, #004b87 100%);
+        }
+        .glass-header {
+            background: rgba(247, 249, 252, 0.8);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopAppBar Navigation Shell (Suppressed based on Transactional Rule but referenced for Identity) -->
+<header class="fixed top-0 left-0 right-0 z-50 glass-header">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-7xl mx-auto">
+<div class="font-headline text-2xl font-black text-primary tracking-tighter">
+                Mecanosoft
+            </div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="help_outline">help_outline</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center p-6 pt-24 gradient-bg">
+<!-- Auth Card -->
+<div class="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-700">
+<div class="bg-surface-container-lowest rounded-3xl p-8 md:p-12 shadow-[0_40px_60px_-10px_rgba(25,28,30,0.06)] border border-outline-variant/15">
+<!-- Header Section -->
+<div class="text-center mb-10">
+<h1 class="font-headline text-3xl font-extrabold text-primary tracking-tight mb-3">Redefinir Senha</h1>
+<p class="text-on-surface-variant font-medium leading-relaxed">Crie uma nova senha forte para acessar sua conta.</p>
+</div>
+<!-- Reset Form -->
+<form class="space-y-6" onsubmit="return false;">
+<!-- New Password Input -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-primary ml-1 uppercase tracking-wider" for="password">Nova Senha</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span>
+</div>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-300 outline-none" id="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Confirm Password Input -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-primary ml-1 uppercase tracking-wider" for="confirm-password">Confirmar Nova Senha</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span>
+</div>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-300 outline-none" id="confirm-password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Action Button -->
+<button class="btn-gradient w-full text-on-primary font-headline font-bold py-4 px-6 rounded-full flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-lg shadow-primary/20 group" type="submit">
+                        Redefinir Senha
+                        <span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Navigation Back -->
+<div class="mt-8 text-center">
+<a class="inline-flex items-center gap-2 text-on-surface-variant font-semibold hover:text-primary transition-colors duration-300 group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform" data-icon="arrow_back">arrow_back</span>
+                        Voltar para o Login
+                    </a>
+</div>
+</div>
+<!-- Contextual Branding / Graphic (Optional but reinforces Architectural Curator feel) -->
+<div class="mt-12 opacity-30 grayscale hover:grayscale-0 transition-all duration-1000">
+<div class="flex justify-center gap-8">
+<div class="h-[1px] w-12 bg-outline-variant my-auto"></div>
+<span class="font-headline text-xs font-bold tracking-[0.4em] uppercase text-outline">Azure Ethos Systems</span>
+<div class="h-[1px] w-12 bg-outline-variant my-auto"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-transparent py-12">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-12 gap-6 max-w-7xl mx-auto">
+<div class="font-headline text-label-sm uppercase tracking-widest text-on-surface-variant/70">
+                © 2024 Mecanosoft. Todos os direitos reservados.
+            </div>
+<div class="flex gap-8 font-body text-label-sm uppercase tracking-widest">
+<a class="text-on-surface-variant/70 hover:text-primary transition-all underline-offset-4 hover:underline" href="#">Suporte</a>
+<a class="text-on-surface-variant/70 hover:text-primary transition-all underline-offset-4 hover:underline" href="#">Termos de Uso</a>
+<a class="text-on-surface-variant/70 hover:text-primary transition-all underline-offset-4 hover:underline" href="#">Privacidade</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for form focus
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.parentElement.classList.add('scale-[1.01]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Simple button interaction
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            const btn = e.target.querySelector('button');
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin" data-icon="sync">sync</span> Processando...`;
+            
+            setTimeout(() => {
+                btn.innerHTML = `<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span> Sucesso!`;
+                btn.classList.replace('btn-gradient', 'bg-tertiary-container');
+                setTimeout(() => {
+                   btn.innerHTML = originalContent;
+                   btn.disabled = false;
+                   btn.classList.replace('bg-tertiary-container', 'btn-gradient');
+                }, 2000);
+            }, 1500);
+        });
+    </script>
+</body></html>
