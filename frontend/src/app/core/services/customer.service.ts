@@ -1,6 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+
 
 import { Vehicle, OptionalVehicle } from '../models/vehicle.model';
 
@@ -22,7 +24,7 @@ export interface Customer {
 })
 export class CustomerService {
   private http = inject(HttpClient);
-  private readonly apiUrl = 'https://localhost:44329/api/Customers';
+  private readonly apiUrl = `${environment.apiUrl}/Customers`;
 
   getCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(this.apiUrl);
