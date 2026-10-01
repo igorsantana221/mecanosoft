@@ -20,6 +20,9 @@ namespace MonkOrc.Api.Data
         public DbSet<QuoteItem> QuoteItems { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Plan> Plans { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<WebhookEvent> WebhookEvents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +38,7 @@ namespace MonkOrc.Api.Data
             modelBuilder.Entity<Quote>().HasQueryFilter(q => q.TenantId == _tenantService.GetTenantId());
             modelBuilder.Entity<Product>().HasQueryFilter(p => p.TenantId == _tenantService.GetTenantId());
             modelBuilder.Entity<Vehicle>().HasQueryFilter(v => v.TenantId == _tenantService.GetTenantId());
+            modelBuilder.Entity<Subscription>().HasQueryFilter(s => s.TenantId == _tenantService.GetTenantId());
 
 
             modelBuilder.Entity<User>()
@@ -111,6 +115,26 @@ namespace MonkOrc.Api.Data
 
             foreach (var prop in new[] { "IcmsRate", "IpiRate", "PisRate", "CofinsRate", "IssqnRate" })
                 modelBuilder.Entity<Product>().Property(prop).HasColumnType("decimal(5,2)");
+
+            // Plan & Subscription Configuration
+            modelBuilder.Entity<Plan>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Subscription>()
+                .HasOne(s => s.Tenant)
+                .WithMany()
+                .HasForeignKey(s => s.TenantId);
+
+            modelBuilder.Entity<Subscription>()
+                .HasOne(s => s.Plan)
+                .WithMany()
+                .HasForeignKey(s => s.PlanId);
+
+            // WebhookEvent Idempotency Index
+            modelBuilder.Entity<WebhookEvent>()
+                .HasIndex(w => w.EventId)
+                .IsUnique();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

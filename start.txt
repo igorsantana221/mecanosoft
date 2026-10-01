@@ -1,5 +1,41 @@
-npx @vudovn/ag-kit init
+================================================================================
+                    MONKORC (MECANOSOFT) - INICIALIZAÇÃO RÁPIDA
+================================================================================
 
-criar um dev plan o nome é MonkOrc, sistema web com posibilidade de uso no mobile.
+Consulte o manual completo e detalhado em: README.md na raiz do projeto.
 
-o sistema tera as principais telas como  login, recuperação de senha, registro, perfil de usuario. novo orçamento,lista de orçamento para consultas, cadastro de produtos, assinatura e planos.
+--------------------------------------------------------------------------------
+1. BANCO DE DADOS (PostgreSQL na porta 5432)
+--------------------------------------------------------------------------------
+Opcao A (Com Docker na raiz do projeto):
+  docker compose up -d
+
+Opcao B (PostgreSQL local):
+  Garanta que o serviço do PostgreSQL está rodando e com as credenciais
+  configuradas em: backend/MonkOrc.Api/appsettings.json
+
+--------------------------------------------------------------------------------
+2. BACKEND (.NET 8 Web API)
+--------------------------------------------------------------------------------
+No terminal:
+  cd backend/MonkOrc.Api
+  dotnet restore
+  dotnet run
+
+Swagger UI disponivel em:
+  https://localhost:7021/swagger ou http://localhost:5135/swagger
+
+--------------------------------------------------------------------------------
+3. FRONTEND (Angular + Tailwind CSS)
+--------------------------------------------------------------------------------
+Em outro terminal:
+  cd frontend
+  npm install
+  npm start
+
+Aplicação disponivel em:
+  http://localhost:4200
+
+Nota: Verifique se a URL da API em 'frontend/src/environments/environment.ts'
+bate com a porta exibida no terminal do backend.
+================================================================================

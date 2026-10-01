@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MonkOrc.Api.Data;
+using MonkOrc.Api.Models;
 using MonkOrc.Api.Services;
 using System.Text;
 
@@ -115,6 +116,40 @@ using (var scope = app.Services.CreateScope())
     {
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         await db.Database.MigrateAsync();
+
+        // Seed Plans
+        if (!await db.Plans.AnyAsync())
+        {
+            var plans = new List<Plan>
+            {
+                new Plan 
+                { 
+                    Name = "Essencial", 
+                    Description = "Ideal para começar a gerenciar sua oficina.",
+                    Price = 39.90m, 
+                    BillingCycle = "MONTHLY", 
+                    Features = new List<string> { "Clientes", "Veículos", "Ordens de serviço", "Histórico", "Agenda", "Cadastro de serviços" }
+                },
+                new Plan 
+                { 
+                    Name = "PRO", 
+                    Description = "Recursos completos e sem limites de cadastros.",
+                    Price = 69.90m, 
+                    BillingCycle = "MONTHLY", 
+                    Features = new List<string> { "Tudo do Essencial", "Clientes ilimitados", "Veículos ilimitados", "Ordens de serviço ilimitadas", "Financeiro", "Estoque", "Relatórios", "Dashboard", "Integrações", "Recursos avançados" }
+                },
+                new Plan 
+                { 
+                    Name = "Oficina", 
+                    Description = "Para oficinas maiores com equipes e múltiplos usuários.",
+                    Price = 119.90m, 
+                    BillingCycle = "MONTHLY", 
+                    Features = new List<string> { "Tudo do PRO", "Múltiplos usuários", "Controle de permissões", "Recursos avançados para equipes" }
+                }
+            };
+            db.Plans.AddRange(plans);
+            await db.SaveChangesAsync();
+        }
     }
     catch (Exception ex)
     {
