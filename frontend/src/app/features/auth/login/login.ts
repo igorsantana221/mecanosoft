@@ -37,15 +37,42 @@ export class Login {
       };
 
       this.authService.login(credentials).subscribe({
-        next: () => {
+        next: (response) => {
+          console.log('========== LOGIN SUCCESS ==========');
+          console.log('Resposta:', response);
+          console.log('Token:', response.token);
+          console.log(
+            'Token no localStorage:',
+            localStorage.getItem('monkorc_token')
+          );
+
           this.notificationService.success('Login realizado com sucesso!');
-          this.router.navigate(['/dashboard']);
+
+          console.log('ANTES DO NAVIGATE');
+
+          this.router.navigate(['/dashboard']).then(result => {
+            console.log('RESULTADO NAVIGATE:', result);
+            console.log('URL ATUAL:', this.router.url);
+          });
         },
+
         error: (err) => {
+          console.error('========== LOGIN ERROR ==========');
+          console.error(err);
+
           this.isLoading.set(false);
-          const errorMsg = typeof err.error === 'string' ? err.error : err.error?.message || 'Credenciais inválidas ou erro no servidor.';
+
+          const errorMsg =
+            typeof err.error === 'string'
+              ? err.error
+              : err.error?.message || 'Credenciais inválidas ou erro no servidor.';
+
           this.notificationService.error(errorMsg);
           this.errorMessage = errorMsg;
+        },
+
+        complete: () => {
+          console.log('LOGIN OBSERVABLE COMPLETE');
         }
       });
     }
