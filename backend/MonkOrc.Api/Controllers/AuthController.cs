@@ -31,7 +31,13 @@ namespace MonkOrc.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequestDto request)
         {
-            if (await _context.Users.AnyAsync(u => u.Email == request.Email))
+            var normalizedEmail = request.Email?.Trim().ToLowerInvariant();
+            if (string.IsNullOrWhiteSpace(normalizedEmail))
+            {
+                return BadRequest("O e-mail é obrigatório.");
+            }
+
+            if (await _context.Users.IgnoreQueryFilters().AnyAsync(u => u.Email.ToLower() == normalizedEmail))
             {
                 return BadRequest("E-mail já cadastrado.");
             }
@@ -42,24 +48,24 @@ namespace MonkOrc.Api.Controllers
             var tenant = new Tenant
             {
                 Id = Guid.NewGuid(),
-                Name = !string.IsNullOrWhiteSpace(request.CompanyName) ? request.CompanyName : $"Empresa de {request.Name}",
-                Cnpj = request.Cnpj,
-                Phone = request.Phone,
-                ZipCode = request.ZipCode,
-                Street = request.Street,
-                Number = request.Number,
-                Complement = request.Complement,
-                Neighborhood = request.Neighborhood,
-                City = request.City,
-                State = request.State,
+                Name = !string.IsNullOrWhiteSpace(request.CompanyName) ? request.CompanyName.Trim() : $"Empresa de {request.Name?.Trim()}",
+                Cnpj = request.Cnpj?.Trim(),
+                Phone = request.Phone?.Trim(),
+                ZipCode = request.ZipCode?.Trim(),
+                Street = request.Street?.Trim(),
+                Number = request.Number?.Trim(),
+                Complement = request.Complement?.Trim(),
+                Neighborhood = request.Neighborhood?.Trim(),
+                City = request.City?.Trim(),
+                State = request.State?.Trim(),
                 CreatedAt = Helpers.AppTime.Now()
             };
 
             var user = new User
             {
                 Id = Guid.NewGuid(),
-                Name = request.Name,
-                Email = request.Email,
+                Name = request.Name?.Trim() ?? string.Empty,
+                Email = normalizedEmail,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
                 EmailConfirmationToken = confirmationToken,
                 IsEmailConfirmed = false,
@@ -67,19 +73,37 @@ namespace MonkOrc.Api.Controllers
                 TenantId = tenant.Id
             };
 
-            await _context.Tenants.AddAsync(tenant);
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.Tenants.AddAsync(tenant);
+                await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is Npgsql.PostgresException pgEx && pgEx.SqlState == "23505")
+                {
+                    return BadRequest("E-mail já cadastrado.");
+                }
+                throw;
+            }
 
             // Send Confirmation Email
-            var confirmationLink = $"{Request.Scheme}://{Request.Host}/api/auth/confirm-email?email={user.Email}&token={confirmationToken}";
-            
-            var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "RegistrationEmail.html");
-            string emailBody = await System.IO.File.ReadAllTextAsync(templatePath);
-            emailBody = emailBody.Replace("{{user.Name}}", user.Name)
-                                 .Replace("{{confirmationLink}}", confirmationLink);
+            try
+            {
+                var confirmationLink = $"{Request.Scheme}://{Request.Host}/api/auth/confirm-email?email={user.Email}&token={confirmationToken}";
+                
+                var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "RegistrationEmail.html");
+                string emailBody = await System.IO.File.ReadAllTextAsync(templatePath);
+                emailBody = emailBody.Replace("{{user.Name}}", user.Name)
+                                     .Replace("{{confirmationLink}}", confirmationLink);
 
-            await _emailService.SendEmailAsync(user.Email, "Confirmação de Cadastro - Mecanosoft", emailBody);
+                await _emailService.SendEmailAsync(user.Email, "Confirmação de Cadastro - Mecanosoft", emailBody);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Aviso] Falha ao enviar e-mail de confirmação: {ex.Message}");
+            }
 
             return Ok(new { message = "Usuário cadastrado com sucesso. Por favor, verifique seu e-mail para confirmar sua conta." });
         }
@@ -87,9 +111,10 @@ namespace MonkOrc.Api.Controllers
         [HttpGet("confirm-email")]
         public async Task<IActionResult> ConfirmEmail(string email, string token)
         {
+            var normalizedEmail = email?.Trim().ToLowerInvariant();
             var user = await _context.Users
                 .IgnoreQueryFilters()
-                .FirstOrDefaultAsync(u => u.Email == email && u.EmailConfirmationToken == token);
+                .FirstOrDefaultAsync(u => u.Email.ToLower() == normalizedEmail && u.EmailConfirmationToken == token);
 
             if (user == null)
             {
@@ -106,10 +131,11 @@ namespace MonkOrc.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequestDto request)
         {
+            var loginEmail = request.Email?.Trim().ToLowerInvariant();
+
             var user = await _context.Users
                 .IgnoreQueryFilters()
-                .FirstOrDefaultAsync(u => u.Email == request.Email);
-
+                .FirstOrDefaultAsync(u => u.Email.ToLower() == loginEmail);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
             {
@@ -136,11 +162,11 @@ namespace MonkOrc.Api.Controllers
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
         {
-            var email = request.Email;
+            var email = request.Email?.Trim().ToLowerInvariant();
 
             var user = await _context.Users
                 .IgnoreQueryFilters()
-                .FirstOrDefaultAsync(u => u.Email == email);
+                .FirstOrDefaultAsync(u => u.Email.ToLower() == email);
 
             if (user == null) return Ok(new { message = "Se o e-mail existir, um link de redefinição foi enviado." });
 
