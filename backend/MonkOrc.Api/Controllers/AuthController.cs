@@ -336,7 +336,7 @@ namespace MonkOrc.Api.Controllers
                 issuer: jwtSettings["Issuer"],
                 audience: jwtSettings["Audience"],
                 claims: claims,
-                expires: Helpers.AppTime.Now().AddMinutes(expirationInMinutes),
+                expires: DateTime.UtcNow.AddMinutes(expirationInMinutes),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
