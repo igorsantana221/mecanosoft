@@ -90,8 +90,14 @@ export class AuthService {
   }
 
   private setSession(auth: AuthResponse): void {
+    console.log('SET SESSION');
+    console.log('TOKEN RECEBIDO:', auth.token);
+
     localStorage.setItem('monkorc_token', auth.token);
     localStorage.setItem('monkorc_user', JSON.stringify(auth));
+
+    console.log('TOKEN NO LOCALSTORAGE:', localStorage.getItem('monkorc_token'));
+
     this.currentUser.set(auth);
     this.isAuthenticated.set(true);
   }
