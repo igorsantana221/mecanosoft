@@ -22,16 +22,25 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddHttpClient<IVehicleLookupService, VehicleLookupService>();
 
 // CORS Configuration
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngular", policy =>
-    {
-        policy.WithOrigins(
-            "http://localhost:4200",
-            "https://mecanosoft.onrender.com"
-        )
-        .AllowAnyHeader()
-        .AllowAnyMethod();
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAngular", policy =>
+//    {
+//        policy.WithOrigins(
+//            "http://localhost:4200",
+//            "https://mecanosoft.onrender.com"
+//        )
+//        .AllowAnyHeader()
+//        .AllowAnyMethod();
+//    });
+//});
+
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAngular", policy => {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 
